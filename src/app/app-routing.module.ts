@@ -13,6 +13,7 @@ import { CourseComponent } from './view/course/course.component';
 import { DeckComponent } from './view/deck/deck.component';
 import { CardsComponent } from './view/cards/cards.component';
 import { AttachmentComponent } from './view/attachment/attachment.component';
+import { FolderComponent } from './view/folder/folder.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path : "deck",component:DeckComponent},
   {path:"cards",component:CardsComponent},
   {path:"attachment",component:AttachmentComponent},
+  {path : "folder",component:FolderComponent},
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
 ];
 

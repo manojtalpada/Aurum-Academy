@@ -131,12 +131,12 @@ export class AunumService {
             });
     }
 
-    getAllImage(data){
-        return this.http.post<any>(appConfig.apiUrl + '/uploadimg/', data)
-        .map(res => {
-            return res;
-        });
-    }
+    // getAllImage(data){
+    //     return this.http.post<any>(appConfig.apiUrl + '/uploadimg/', data)
+    //     .map(res => {
+    //         return res;
+    //     });
+    // }
     Addimage(data){
         return this.http.post<any>(appConfig.apiUrl + '/uploadimg/', data)
         .map(res => {
@@ -168,6 +168,33 @@ export class AunumService {
     }
     DeleteAttachment(data){
         return this.http.post<any>(appConfig.apiUrl + '/attachments/', data)
+        .map(res => {
+            return res;
+        });
+    }
+
+    // Folders 
+
+    getAllFolder(data){
+        return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    DeleteFolder(data){
+        return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    UpdateFolder(data){
+        return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    insertFolder(data){
+        return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
         .map(res => {
             return res;
         });

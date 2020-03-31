@@ -13,6 +13,7 @@ export class CardsComponent implements OnInit {
 
   public imageList: any ;
   img : any = {};
+
   file : any = {};
   public FileList;
   fileData: File = null;
@@ -22,7 +23,7 @@ export class CardsComponent implements OnInit {
   uploadForm: FormGroup;  
   userid = sessionStorage.getItem('userid');
   constructor(private formBuilder: FormBuilder,private aunumservices: AunumService,private http: HttpClient,private router: Router, private route: ActivatedRoute, ) {
-    this.getAllImages();
+    // this.getAllImages();
    }
 
   ngOnInit() {
@@ -30,24 +31,24 @@ export class CardsComponent implements OnInit {
       profile: ['']
     });
   }
-  getAllImages() {
-    var dataget = {
-    my_id: JSON.parse(this.userid),
-     action:"getlist"
+//   getAllImages() {
+//     var dataget = {
+//     my_id: JSON.parse(this.userid),
+//      action:"getlist"
 
-   }
-   this.aunumservices.getAllImage(dataget)
-     .subscribe(
-       response => {
-         this.imageList = response.data;
-        //  console.log("img",this.imageList);
+//    }
+//    this.aunumservices.getAllImage(dataget)
+//      .subscribe(
+//        response => {
+//          this.imageList = response.data;
+//         //  console.log("img",this.imageList);
 
- },
- error => {
-      console.log(error);
-         }
-         )
-   }
+//  },
+//  error => {
+//       console.log(error);
+//          }
+//          )
+//    }
 
 
 
@@ -101,7 +102,10 @@ export class CardsComponent implements OnInit {
       .subscribe(
         data => { 
           var custdetails = data; 
-         this.getAllImages();
+
+          // console.log(custdetails);
+        //  this.getAllImages();
+        this.AddAttachment(custdetails);
          
         },
         error => {
@@ -110,58 +114,28 @@ export class CardsComponent implements OnInit {
   }
 
 
+  AddAttachment(custdetails) {
+    var dataget = {
+      my_id: JSON.parse(this.userid),
+      action:"insert",
+     parent_id : '',
+     parent_type : '',
+     type : "image",
+     media_url :custdetails.data,
+     content :""     
 
-  // uploading
-
-//   fileData: File = null;
-// previewUrl:any = null;
-// fileUploadProgress: string = null;
-// uploadedFilePath: string = null;
-// constructor(private http: HttpClient) { }
- 
-// fileProgress(fileInput: any) {
-//       this.fileData = <File>fileInput.target.files[0];
-
-//       if (fileInput.target.files.length > 0) {
-//         const file = fileInput.target.files[0];
-//         this.formData.append('file', file, file.name);  
-    
-//       }
-//       this.preview();
-// }
- 
-// preview() {
-//     Show preview 
-//     var mimeType = this.fileData.type;
-//     if (mimeType.match(/image\/*/) == null) {
-//       return;
-//     }
- 
-//     var reader = new FileReader();      
-//     reader.readAsDataURL(this.fileData); 
-//     reader.onload = (_event) => { 
-//       this.previewUrl = reader.result; 
-//     }
-// }
- 
-// onSubmit() {
-//   const formData = new FormData();
-//       this.formData.append('file',this.fileData);
-//   var dataget = {
-//     my_id: JSON.parse(this.userid),
-//    action:"upload",
-//    file :this.fileData,
-//   //  description : this.deck.description   
-
-//  } 
-    
-//       this.http.post(appConfig.apiUrl + '/uploadimg/', dataget)
-//         .subscribe(res => {
-//           console.log(res);
-//           // this.uploadedFilePath = res.data.filePath;
-//           alert('SUCCESS !!');
-//         })
-// }
+   }
+    this.aunumservices.insertAttachment(dataget)
+      .subscribe(
+        data => { 
+          var custdetails = data; 
+        //  this.getAllAttachment();
+         
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
 
   
