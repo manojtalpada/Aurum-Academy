@@ -1,0 +1,30 @@
+<div class="login-page-index">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
+                <div class="site-logo">
+                    <!-- <img src="assets/img/logo.png" class="img-fluid" alt=""> -->
+                </div>
+                <div class="login-info">
+                    <h1 class="text-center">Forgot Password</h1>
+
+                </div>
+                <div class="login-form">
+                    <form name="login" (ngSubmit)="LoginForm.form.valid && onSubmit(LoginForm)" novalidate #LoginForm="ngForm">
+                        <!-- <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email Address" name="username" [(ngModel)]="form.username" id="username" #username="ngModel" [ngClass]="{ 'is-invalid': LoginForm.submitted && username.invalid }" required>
+                            <small *ngIf="LoginForm.submitted && username.invalid" class="invalid-feedback">
+                           <small *ngIf="username.errors.required">Email Address is required</small>
+                            </small>
+                        </div> -->
+
+
+                        <button type="submit" class="btn btn-info btn-block btn-login">Submit</button>
+                        <button type="submit" routerLink="/login" class="btn btn-info btn-block btn-login">Back to Login</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

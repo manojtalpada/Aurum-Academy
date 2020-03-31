@@ -1,0 +1,205 @@
+.header-topbar {
+    padding: 10px 0;
+}
+
+header#header {
+    background: #ffffff;
+    box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-item {
+    margin-right: 1rem;
+}
+
+.welcome-user {
+    font-size: 14px;
+    color: #858585;
+    margin-bottom: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.welcome-user span {
+    display: block;
+    font-size: 24px;
+    font-weight: 300;
+    color: #222222;
+}
+
+.welcome-user span font {
+    font-weight: 700;
+}
+
+.action-buttons .btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    padding: 0;
+    font-size: 18px;
+    margin: 0px 5px;
+}
+
+.section.section-footer {
+    background: #e5e7ed;
+    line-height: normal;
+    padding: 20px 0;
+}
+
+.total-practices {
+    float: right;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.total-practices .practice-icon {
+    float: left;
+    margin-right: 10px;
+}
+
+.total-practices span {
+    display: inline-block;
+    line-height: normal;
+    font-size: 14px;
+}
+
+.total-practices span font {
+    display: block;
+    color: #222222;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.myaccount {
+    float: right;
+}
+
+.myaccount .img-profile {
+    width: 50px;
+}
+
+.myaccount a {
+    color: #222222;
+    display: block;
+}
+
+.myaccount a:hover,
+.myaccount a:focus {
+    text-decoration: none;
+}
+
+.myaccount span {
+    margin-left: 5px;
+    color: #222222;
+}
+
+.heading {
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.heading h3 {
+    display: inline-block;
+    margin: 0;
+    line-height: 38px;
+}
+
+.btn-add span {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+label em {
+    color: #ff0000;
+}
+
+.checkbox-list {
+    padding: 0;
+    list-style: none;
+}
+
+.checkbox-list li {
+    margin-bottom: 10px;
+}
+
+
+/* Login */
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #43A047;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: blue;
+    font-size: 15px;
+}
+
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.form .register-form {
+    display: none;
+}
+
+.img-row {
+    margin-left: 50px;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}

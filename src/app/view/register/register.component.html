@@ -1,0 +1,55 @@
+<div class="login-page">
+    <div class="form">
+        <form #UpdateForm="ngForm" class="register-form">
+            <input type="text" placeholder="name" />
+            <input type="password" placeholder="password" />
+            <input type="text" placeholder="email address" />
+            <button>create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form>
+        <form #UpdateForm="ngForm" class="login-form">
+            <input type="text" [(ngModel)]="model.first_name" name="first_name" #first_name="ngModel" placeholder="First Name" />
+            <input type="text" [(ngModel)]="model.last_name" name="last_name" #last_name="ngModel" placeholder="Last Name" />
+            <input type="text" [(ngModel)]="model.user_name" name="user_name" #user_name="ngModel" placeholder="username" />
+
+            <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" [ngClass]="{ 'is-invalid': UpdateForm.submitted && email.invalid }" required>
+            <small *ngIf="UpdateForm.submitted && email.invalid" class="invalid-feedback">
+                                    <small *ngIf="email.errors.required">Email is required</small>
+            <small *ngIf="email.errors.pattern">Email is not valid</small>
+            </small>
+
+            <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" id="password" #password="ngModel" [ngClass]="{ 'is-invalid': UpdateForm.submitted && password.invalid }" minlength="8">
+            <small *ngIf="UpdateForm.submitted && password.invalid" class="invalid-feedback">
+                                    <!-- <small *ngIf="password.errors.required">Password is required</small> -->
+            <small *ngIf="password.errors.minlength">Minimum 8 character allow</small>
+            </small>
+
+            <input type="text" class="form-control" placeholder="google_id" name="google_id" [(ngModel)]="model.google_id" #google_id="ngModel">
+            <input type="text" class="form-control" placeholder="facebook_id" name="facebook_id" [(ngModel)]="model.facebook_id" #facebook_id="ngModel">
+            <input type="text" class="form-control" placeholder="current_package_id" name="current_package_id" [(ngModel)]="model.current_package_id" #current_package_id="ngModel">
+            <input type="text" class="form-control" placeholder="current_package_name" name="current_package_name" [(ngModel)]="model.current_package_name" #current_package_name="ngModel">
+            <input type="text" class="form-control" placeholder="current_package_type" name="current_package_type" [(ngModel)]="model.current_package_type" #current_package_type="ngModel">
+            <input type="text" class="form-control" placeholder="current_package_pay_by_user_id" name="current_package_pay_by_user_id" [(ngModel)]="model.current_package_pay_by_user_id" #current_package_pay_by_user_id="ngModel">
+            <input type="text" class="form-control" placeholder="master_id" name="master_id" [(ngModel)]="model.master_id" #master_id="ngModel">
+            <!-- <div class="form-group">
+                <label for="select1">Select Country</label>
+                <fieldset class="form-group">
+                    <ng-select name="user_type" [(ngModel)]="model.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
+                </fieldset>
+            </div> -->
+            <input type="text" class="form-control" placeholder="user_type" name="user_type" [(ngModel)]="model.user_type" #user_type="ngModel">
+            <input type="date" class="form-control" placeholder="birthday" name="birthday" [(ngModel)]="model.birthday" #birthday="ngModel">
+            <input type="text" class="form-control" placeholder="url_slug" name="url_slug" [(ngModel)]="model.url_slug" #url_slug="ngModel">
+            <input type="text" class="form-control" placeholder="action" name="action" [(ngModel)]="model.action" #action="ngModel">
+            <!-- <input type="file" id="photo" (change)="onFileSelect($event)" #fileInput />
+            <img [src]="url" height="250" width="250" *ngIf="url">
+            <div class="image-preview mb-3" *ngIf="previewUrl">
+                <img [src]="previewUrl" height="150" />
+            </div> -->
+
+            <button (click)="register();">Register</button>
+            <p class="message">Already registered? <a routerLink="/login">Sign In</a></p>
+        </form>
+        <!-- <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor> -->
+    </div>
+</div>
