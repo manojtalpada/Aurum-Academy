@@ -181,8 +181,23 @@ export class AunumService {
             return res;
         });
     }
+    //Lessons
+     
+    getAllLesson(data){
+        return this.http.post<any>(appConfig.apiUrl + '/lessons/', data)
+        .map(res => {
+            return res;
+        });
+    }
     DeleteFolder(data){
         return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    
+    insertLesson(data){
+        return this.http.post<any>(appConfig.apiUrl + '/lessons/', data)
         .map(res => {
             return res;
         });
@@ -193,8 +208,20 @@ export class AunumService {
             return res;
         });
     }
+    updateLesson(data){
+        return this.http.post<any>(appConfig.apiUrl + '/lessons/', data)
+        .map(res => {
+            return res;
+        });
+    }
     insertFolder(data){
         return this.http.post<any>(appConfig.apiUrl + '/folders/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    deleteLesson(data){
+        return this.http.post<any>(appConfig.apiUrl + '/lessons/', data)
         .map(res => {
             return res;
         });

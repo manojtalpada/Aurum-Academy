@@ -34,6 +34,7 @@ import { DeckComponent } from './view/deck/deck.component';
 import { CardsComponent } from './view/cards/cards.component';
 import { AttachmentComponent } from './view/attachment/attachment.component';
 import { FolderComponent } from './view/folder/folder.component';
+import { LessonComponent } from './view/lesson/lesson.component';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -74,7 +75,8 @@ export function provideConfig() {
     DeckComponent,
     CardsComponent,
     AttachmentComponent,
-    FolderComponent
+    FolderComponent,
+    LessonComponent
   ],
   imports: [
     BrowserModule,
