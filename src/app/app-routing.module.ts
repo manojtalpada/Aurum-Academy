@@ -13,23 +13,27 @@ import { CourseComponent } from './view/course/course.component';
 import { DeckComponent } from './view/deck/deck.component';
 import { CardsComponent } from './view/cards/cards.component';
 import { AttachmentComponent } from './view/attachment/attachment.component';
+import { LessonComponent } from './view/lesson/lesson.component';
+import { AuthGuard } from './guards';
 
 
 const routes: Routes = [
 
-  {path:"header",component:HeaderComponent},
-  {path:"footer",component : FooterComponent},
+  {path:"header",component:HeaderComponent,canActivate: [AuthGuard]},
+  {path:"footer",component : FooterComponent,canActivate: [AuthGuard]},
   {path:"login",component: LoginComponent},
   {path:"register",component: RegisterComponent},
-  {path:"dashboard",component: DashboardComponent},
-  {path:"view-user",component: ViewUserComponent},
+  {path:"dashboard",component: DashboardComponent,canActivate: [AuthGuard]},
+  {path:"view-user",component: ViewUserComponent,canActivate: [AuthGuard]},
   {path:"logout",component:LogoutComponent},
   {path : "forgote",component:ForgoteComponent},
-  {path : "changes",component : ChangesComponent},
-  {path : "course",component : CourseComponent},
-  {path : "deck",component:DeckComponent},
-  {path:"cards",component:CardsComponent},
-  {path:"attachment",component:AttachmentComponent},
+  {path : "changes",component : ChangesComponent,canActivate: [AuthGuard]},
+  {path : "course",component : CourseComponent,canActivate: [AuthGuard]},
+  {path : "deck",component:DeckComponent,canActivate: [AuthGuard]},
+  {path:"cards",component:CardsComponent,canActivate: [AuthGuard]},
+  {path:"attachment",component:AttachmentComponent,canActivate: [AuthGuard]},
+  {path:"lesson",component:LessonComponent,canActivate: [AuthGuard]},
+
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
 ];
 

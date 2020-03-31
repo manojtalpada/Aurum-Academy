@@ -33,6 +33,7 @@ import { CourseComponent } from './view/course/course.component';
 import { DeckComponent } from './view/deck/deck.component';
 import { CardsComponent } from './view/cards/cards.component';
 import { AttachmentComponent } from './view/attachment/attachment.component';
+import { LessonComponent } from './view/lesson/lesson.component';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -72,7 +73,8 @@ export function provideConfig() {
     CourseComponent,
     DeckComponent,
     CardsComponent,
-    AttachmentComponent
+    AttachmentComponent,
+    LessonComponent
   ],
   imports: [
     BrowserModule,
