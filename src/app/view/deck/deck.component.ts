@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AunumService } from 'src/app/services/aunumServices';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-deck',
@@ -13,7 +14,7 @@ export class DeckComponent implements OnInit {
   public cards: any=[];
   public addcards = false;
   userid = sessionStorage.getItem('userid');
-  constructor(private aunumservices: AunumService,private _route: ActivatedRoute) {
+  constructor(private fb: FormBuilder,private aunumservices: AunumService,private _route: ActivatedRoute) {
     this.getAllDeck();
    }
 
@@ -109,21 +110,24 @@ export class DeckComponent implements OnInit {
   addcard(){
     this.addcards = true;
   }
-
-  addCardslist() {
+  // createFilterGroup() {
+  //   return this.fb.group({
+  //     filterType: [],
+  //     apiType: []
+  //   });
+  // }
+  addCardslist(data) {
     this.cards.push({
+      data
       
-      // admin_id:parseInt(localStorage.getItem("userid")),
-      message: "", 
-    });
+    });   
     
-    console.log(this.cards)
   }
 
-  removeTodo(todo,i: number) {
+  removeCard(todo,i: number) {
     // i = 1;
     //i.todo_id
-     console.log(i)
+    //  console.log(i)
     this.cards.splice(i, 1);
     // console.log(this.todos);
   }

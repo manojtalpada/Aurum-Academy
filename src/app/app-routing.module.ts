@@ -16,6 +16,7 @@ import { AttachmentComponent } from './view/attachment/attachment.component';
 import { FolderComponent } from './view/folder/folder.component';
 import { LessonComponent } from './view/lesson/lesson.component';
 import { AuthGuard } from './guards';
+import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
   {path:"cards",component:CardsComponent,canActivate: [AuthGuard]},
   {path:"attachment",component:AttachmentComponent,canActivate: [AuthGuard]},
   {path:"lesson",component:LessonComponent,canActivate: [AuthGuard]},
-
+  {path : "paypal-demo",component:PaypalDemoComponent},
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
 ];
 

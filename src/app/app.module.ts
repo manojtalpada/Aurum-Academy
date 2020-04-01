@@ -35,6 +35,8 @@ import { CardsComponent } from './view/cards/cards.component';
 import { AttachmentComponent } from './view/attachment/attachment.component';
 import { FolderComponent } from './view/folder/folder.component';
 import { LessonComponent } from './view/lesson/lesson.component';
+import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -76,7 +78,8 @@ export function provideConfig() {
     CardsComponent,
     AttachmentComponent,
     FolderComponent,
-    LessonComponent
+    LessonComponent,
+    PaypalDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ export function provideConfig() {
     SelectModule, 
     ReactiveFormsModule,
     TabsModule,
+    NgxPayPalModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
