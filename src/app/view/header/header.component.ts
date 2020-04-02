@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AunumService } from 'src/app/services/aunumServices';
 import { Router } from '@angular/router';
+import { parseDate } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -60,11 +61,11 @@ updateProfile(){
       my_id: JSON.parse(this.userid),
       action:"getbyid"
      }     
-     console.log(datagetget);
     this.aunumservices.updateuserdata(datagetget)
       .subscribe(
         response => {
         this.editcliendataResponse(response.data)
+        console.log(response.data)
         
         },
         err => {
@@ -81,8 +82,8 @@ updateProfile(){
     this.model.user_name = data[0].user_name;
     this.model.email = data[0].email;   
     
-    this.model.birthdate = data[0].birthdate;   
- 
+    this.model.birthdate =  new Date(data[0].birthdate).toISOString().split('T')[0];;   
+      
     
   }
 
