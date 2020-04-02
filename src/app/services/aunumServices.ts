@@ -226,4 +226,25 @@ export class AunumService {
             return res;
         });
     }
+
+    // cards API
+
+    getAllCard(data){
+        return this.http.post<any>(appConfig.apiUrl + '/cards/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    getAllCardById(data){
+        return this.http.post<any>(appConfig.apiUrl + '/get_cards_by_deck_id/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    insertCard(data){
+        return this.http.post<any>(appConfig.apiUrl + '/cards/', data)
+        .map(res => {
+            return res;
+        });
+    }
 }

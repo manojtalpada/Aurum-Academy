@@ -203,3 +203,41 @@ label em {
     margin-top: 5px;
     margin-bottom: 20px;
 }
+
+.card-deck {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #d0e0e0;
+    background-clip: border-box;
+    border-radius: 5px;
+    clear: both;
+}
+
+.card-accent-info {
+    border: solid #28a745 2px;
+}
+
+.card-body-deck {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 30px;
+    height: 450px;
+}
+
+.card-title {
+    margin-top: 160px;
+    margin-left: 95px;
+}
+
+.btn-content {
+    margin-top: 10px;
+}

@@ -23,9 +23,12 @@ export class DeckComponent implements OnInit {
   showEditor = true;
   public Editor = ClassicEditor
 
-
+  card : any = {};
   public deckList;
+  public cardList;
+  public deckbycardList;
   deck : any = {};
+  public ap: boolean = false;
   dataFilter;
   public cards: any=[];
   public filterQuery = "";
@@ -33,6 +36,7 @@ export class DeckComponent implements OnInit {
   userid = sessionStorage.getItem('userid');
   constructor(private fb: FormBuilder,private fb1 :FormBuilder,private aunumservices: AunumService,private _route: ActivatedRoute, private markdownService: MarkdownService) {
     this.getAllDeck();
+    this.getAllCard();
     this.buildForm(this.markdownText);
 
     this.form = fb1.group({
@@ -303,4 +307,79 @@ public config = {
     this.cards.splice(i, 1);
     // console.log(this.todos);
   }
+
+
+
+// ADD Cards Details
+
+
+AddCard() {
+  var dataget = {
+    my_id: JSON.parse(this.userid),
+    action:"insert",
+    parent_type:"deck",
+    side1:this.card.side1,
+    side2:this.card.side2,
+    parent_id:this.deck.id,
+    release_date:"",
+    attachments_ids:""
+ 
+ }
+ console.log(dataget);
+  this.aunumservices.insertCard(dataget)
+    .subscribe(
+      data => { 
+        var custdetails = data; 
+      console.log(custdetails)
+       
+      },
+      error => {
+        console.log(error);
+      });
+}
+
+getAllCard() {
+  var dataget = {
+   my_id: JSON.parse(this.userid),
+   action:"getlist"
+
+ }
+ this.aunumservices.getAllCard(dataget)
+   .subscribe(
+     response => {
+       this.cardList = response.data;
+       console.log("Deck",this.cardList)
+
+},
+error => {
+    console.log(error);
+       }
+       )
+ }
+
+ cardDetails(data){
+  var dataget = {
+    deck_id : data.id,
+    my_id: JSON.parse(this.userid),
+    action:"getbyid"
+ 
+  }
+  console.log(dataget);
+  this.aunumservices.getAllCardById(dataget)
+    .subscribe(
+      response => {
+        this.deckbycardList = response.data;
+        console.log("Deck",this.deckbycardList)
+ 
+ },
+ error => {
+     console.log(error);
+        }
+        )
+
+ }
+
+ addanswer() {
+  this.ap = !this.ap;
+}
 }

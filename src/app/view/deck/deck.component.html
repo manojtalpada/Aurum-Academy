@@ -1,15 +1,12 @@
 <div *ngIf="addcards == false">
-  <app-header></app-header>
-  <section class="section section-content py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="heading">
-            <h3>Deck Details</h3>
-            <a
-              (click)="addModel.show(); deck = {}"
-              class="btn btn-primary float-right"
-              >+ Create New Deck</a
+    <app-header></app-header>
+    <section class="section section-content py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="heading">
+                        <h3>Deck Details</h3>
+                        <a (click)="addModel.show(); deck = {}" class="btn btn-primary float-right">+ Create New Deck</a
             >
           </div>
           <div class="card">
@@ -48,158 +45,105 @@
                           class="btn btn-success"
                           ><span class="mdi mdi-lead-pencil"></span
                         ></a>
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          (click)="deleteDeck(); openDeckModel(item)"
-                          class="btn btn-danger"
-                          ><span class="mdi mdi-close"></span
+                        <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
                         ></a>
-                      </div>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="addcard(); openDeckModel(item)"
-                      >
+                    </div>
+                    <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item)">
                         AddCard
                       </button>
                     </td>
-                    <!-- <td>
-                                        <button type="button" (click)="editModal.show()" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
-                                            <i class="fa fa-edit"></i>
+                    <td>
+                        <button type="button" (click)="ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
                                           </button>
-                                    </td> -->
+                    </td>
 
                     <!-- <td>
                                         <a [routerLink]="[item.username+'/contact']">Go to details</a>
                                     </td> -->
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="7">
-                      <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]">
-                      </mfBootstrapPaginator>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]">
+                                </mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+</div>
+</div>
+</section>
 </div>
 
-<div
-  bsModal
-  #addModel="bs-modal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header appoint-head-color">
-        <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
-        </h4>
-        <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
-        </h4>
-        <button
-          type="button"
-          class="close"
-          (click)="addModel.hide()"
-          aria-label="Close"
-        >
+<div bsModal #addModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
+                </h4>
+                <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
+                </h4>
+                <button type="button" class="close" (click)="addModel.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="name"> Deck Name</label>
-                <input
-                  class="form-control"
-                  id="name"
-                  type="text"
-                  [(ngModel)]="deck.name"
-                  #name="ngModel"
-                  name="name"
-                  placeholder="Enter your Deck Name"
-                />
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name"> Deck Name</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="deck.name" #name="ngModel" name="name" placeholder="Enter your Deck Name" />
 
-                <label for="name">Description</label>
-                <input
-                  class="form-control"
-                  id="name"
-                  type="text"
-                  [(ngModel)]="deck.description"
-                  #description="ngModel"
-                  name="description"
-                  placeholder="Enter description"
-                />
+                                <label for="name">Description</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="deck.description" #description="ngModel" name="description" placeholder="Enter description" />
 
-                <!-- <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="select1">Select your Permission</label>
                                     <fieldset class="form-group">
                                         <ng-select name="permission" [(ngModel)]="course.permission" #permission="ngModel" placeholder="Select your permission" [options]="type" [allowClear]="true"></ng-select>
                                     </fieldset>
                                 </div> -->
 
-                <!-- <label for="name">url_slug</label>
+                                <!-- <label for="name">url_slug</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug"> -->
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="addModel.hide()"
-          >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="addModel.hide()">
             Close
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            *ngIf="deck.id == null"
-            (click)="AddDeck(); addModel.hide()"
-          >
+                    <button type="button" class="btn btn-primary" *ngIf="deck.id == null" (click)="AddDeck(); addModel.hide()">
             Save
           </button>
-          <button
-            type="button"
-            (click)="updateDeck(); addModel.hide()"
-            *ngIf="deck.id != null"
-            class="btn btn-primary"
-          >
+                    <button type="button" (click)="updateDeck(); addModel.hide()" *ngIf="deck.id != null" class="btn btn-primary">
             Update Deck
           </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div *ngIf="addcards == true">
-  <app-header></app-header>
+    <!-- <app-header></app-header> -->
 
-  <section class="section section-content py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="heading">
-            <h3>Flashcards in “{{ deck.name }}”</h3>
-            <a (click)="addcards = false" class="btn btn-primary float-right"
-              ><span class="mdi mdi-arrow-left"></span> Back</a
+    <section class="section section-content py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="heading">
+                        <h3>Flashcards in “{{ deck.name }}”</h3>
+                        <a (click)="addcards = false" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a
             >
 
             <a (click)="editorModel.show()" class="btn btn-primary float-right"
@@ -214,21 +158,13 @@
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label>Question</label>
-                    <input
-                      type="text"
-                      placeholder="Please enter Question"
-                      class="form-control"
-                    />
+                    <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label>Answer</label>
-                    <input
-                      type="text"
-                      placeholder="Please  enter Answer"
-                      class="form-control"
-                    />
+                    <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
                   </div>
                 </div>
                 <div class="text-left">
@@ -246,21 +182,13 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Question</label>
-                      <input
-                        type="text"
-                        placeholder="Please enter Question"
-                        class="form-control"
-                      />
+                      <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Answer</label>
-                      <input
-                        type="text"
-                        placeholder="Please  enter Answer"
-                        class="form-control"
-                      />
+                      <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
                     </div>
                   </div>
 
@@ -275,132 +203,96 @@
                           class="btn btn-danger"
                           ><span class="mdi mdi-close"></span
                         ></a>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-
-              <!-- </div> -->
-              <div class="text-left">
-                <button class="btn btn-primary">Save Card</button>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
 </div>
 
-<div
-  bsModal
-  #editorModel="bs-modal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 1000px;">
-      <div class="modal-header appoint-head-color">
-        <h4 class="modal-title appoint-color">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Editors
-        </h4>
-        <button
-          type="button"
-          class="close"
-          (click)="editorModel.hide()"
-          aria-label="Close"
-        >
+<!-- </div> -->
+<div class="text-left">
+    <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<div bsModal #editorModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 1000px;">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Editors
+                </h4>
+                <button type="button" class="close" (click)="editorModel.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <header class="header">
-                  <h1>WYSIWYG editor</h1>
-                  <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
-                </header>
-                <angular-editor
-                  [(ngModel)]="htmlContent"
-                  [config]="config"
-                ></angular-editor>
-                <h5 class="html-header">HTML Output</h5>
-                <div class="html">
-                  {{ htmlContent }}
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-info float-right"
-                  (click)="sendData()"
-                >
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <header class="header">
+                                    <h1>WYSIWYG editor</h1>
+                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                                </header>
+                                <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+                                <h5 class="html-header">HTML Output</h5>
+                                <div class="html">
+                                    {{ htmlContent }}
+                                </div>
+                                <button type="button" class="btn btn-info float-right" (click)="sendData()">
                   Submit
                 </button>
-              </div>
+                            </div>
 
-              <div class="form-group">
-                <header class="header">
-                  <h1>Markdown editor</h1>
-                  <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
-                </header>
+                            <div class="form-group">
+                                <header class="header">
+                                    <h1>Markdown editor</h1>
+                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                                </header>
 
-                <div class="row">
-                  <div class="col-md-6 action-buttons">
-                    <button
-                      class="btn btn-info "
-                      (click)="showFullScreen(true)"
-                    >
+                                <div class="row">
+                                    <div class="col-md-6 action-buttons">
+                                        <button class="btn btn-info " (click)="showFullScreen(true)">
                       Full Screen Preview
                     </button>
-                  </div>
-                </div>
-                <hr />
+                                    </div>
+                                </div>
+                                <hr />
 
-                <form [formGroup]="templateForm" novalidate>
-                  <div class="editor">
-                    <label>Editor</label>
-                    <angular-markdown-editor
-                      textareaId="editor1"
-                      [options]="editorOptions"
-                      rows="12"
-                      formControlName="body"
-                    >
-                    </angular-markdown-editor>
-                  </div>
-                </form>
+                                <form [formGroup]="templateForm" novalidate>
+                                    <div class="editor">
+                                        <label>Editor</label>
+                                        <angular-markdown-editor textareaId="editor1" [options]="editorOptions" rows="12" formControlName="body">
+                                        </angular-markdown-editor>
+                                    </div>
+                                </form>
 
-                <hr />
-                <h3 class="text-success bold">Preview</h3>
-                <div class="result-preview outline">
-                  <markdown [data]="markdownText"></markdown>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-info float-right"
-                  (click)="sendMarkData()"
-                >
+                                <hr />
+                                <h3 class="text-success bold">Preview</h3>
+                                <div class="result-preview outline">
+                                    <markdown [data]="markdownText"></markdown>
+                                </div>
+                                <button type="button" class="btn btn-info float-right" (click)="sendMarkData()">
                   Submit
                 </button>
-              </div>
+                            </div>
 
-              <div class="form-group">
-                <header class="header">
-                  <h1>CK editor</h1>
-                  <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
-                </header>
-                <form
-                  [formGroup]="form"
-                  (ngSubmit)="onSubmit()"
-                  #demoForm="ngForm"
-                >
-                  <!-- <h3>User profile form</h3> -->
+                            <div class="form-group">
+                                <header class="header">
+                                    <h1>CK editor</h1>
+                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                                </header>
+                                <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm">
+                                    <!-- <h3>User profile form</h3> -->
 
-                  <!-- <div>
+                                    <!-- <div>
                                                 <label for="name">Name</label>
                                                 <input formControlName="name" type="text" name="name" id="name">
                                             </div>
@@ -410,38 +302,32 @@
                                                 <input formControlName="surname" type="text" name="surname" id="surname">
                                             </div> -->
 
-                  <label for="description">Description</label>
-                  <ckeditor
-                    formControlName="description"
-                    [editor]="Editor"
-                    [config]="config"
-                    id="description"
-                    name="description"
-                  >
-                  </ckeditor>
+                                    <label for="description">Description</label>
+                                    <ckeditor formControlName="description" [editor]="Editor" [config]="config" id="description" name="description">
+                                    </ckeditor>
 
-                  <p *ngIf="description?.dirty" class="alert">
-                    Description is "dirty".
-                  </p>
-                  <p *ngIf="description?.touched" class="alert">
-                    Description has been "touched".
-                  </p>
+                                    <p *ngIf="description?.dirty" class="alert">
+                                        Description is "dirty".
+                                    </p>
+                                    <p *ngIf="description?.touched" class="alert">
+                                        Description has been "touched".
+                                    </p>
 
-                  <p>
-                    <button type="reset" (click)="reset()">Reset form</button>
-                  </p>
-                  <!-- <p><button type="submit">Submit this form</button> <em>(Open the console first)</em></p> -->
-                  <button type="submit" class="btn btn-info float-right">
+                                    <p>
+                                        <button type="reset" (click)="reset()">Reset form</button>
+                                    </p>
+                                    <!-- <p><button type="submit">Submit this form</button> <em>(Open the console first)</em></p> -->
+                                    <button type="submit" class="btn btn-info float-right">
                     Submit
                   </button>
-                </form>
+                                </form>
 
-                <h3>Form data preview</h3>
-                <pre style="width: 100%; overflow: auto;">{{
+                                <h3>Form data preview</h3>
+                                <pre style="width: 100%; overflow: auto;">{{
                   form.value | json
                 }}</pre>
-              </div>
-              <!-- <div class="form-group">
+                            </div>
+                            <!-- <div class="form-group">
                                 <label for="name"> Course Name</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="course.name" #name="ngModel" name="name" placeholder="Enter your Course">
 
@@ -458,26 +344,119 @@
                                 <label for="name">url_slug</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug">
                             </div> -->
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="editorModel.hide()"
-          >
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">
             Close
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="AddCourse(); editorModel.hide()"
-          >
+                    <button type="button" class="btn btn-primary" (click)="AddCourse(); editorModel.hide()">
             Save
           </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
+
+
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of requisitionList">
+            <div class="card card-accent-info">
+                <div class="card-body">
+                    sdfsdfsdfsdfsd
+                    <!-- <p>Requisition ID:{{item.reqId}}</p> -->
+                    <div *ngFor="let itemaa of physiciansList">
+                        <div *ngIf="itemaa._id==item.doctorID[0] then prc">
+                        </div>
+                        <ng-template #prc>
+                            <!-- <p>Docter Name: {{itemaa.name}}</p> -->
+                        </ng-template>
+                    </div>
+                    <div *ngFor="let itemaa of patientsList">
+                        <div *ngIf="itemaa._id==item.patientSysID then prc">
+                        </div>
+                        <ng-template #prc>
+                            <!-- <p>Patient Name:{{itemaa.firstname}}</p>
+                            <p>Clinic Name: {{itemaa.clinicname}}</p> -->
+                        </ng-template>
+                    </div>
+                </div>
+                <!-- <td>
+          <button type="button" class="btn btn-primary float-right"
+            (click)="getRequisition(item);assignModel.show();">Assign</button></td> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
+                </h4>
+                <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
+                </h4> -->
+                <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row" *ngFor="let item of deckbycardList; let i = index">
+                        <div class="col-sm-12 col-md-12">
+                            <!-- Card -->
+                            <div class="card-deck">
+                                <div class="card-accent-info">
+                                    <!-- Card image -->
+                                    <!-- <div class="view overlay">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
+                                    <a href="#!">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div> -->
+                                    <!-- Card content -->
+                                    <div class="card-body-deck" *ngIf="!ap">
+                                        <!-- Title -->
+                                        <h4 class="card-title">{{item.side1}}</h4>
+                                        <!-- Text -->
+                                        <p class="card-text"> </p>
+                                        <!-- Button -->
+
+                                    </div>
+                                    <div class="card-body-deck" *ngIf="ap">
+                                        <!-- Title -->
+                                        <h4 class="card-title">{{item.side2}}</h4>
+                                        <!-- Text -->
+                                        <p class="card-text"> </p>
+                                        <!-- Button -->
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Card -->
+
+                            <!-- Card -->
+                            <div class="btn-content modal-content">
+                                <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
+                                <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
