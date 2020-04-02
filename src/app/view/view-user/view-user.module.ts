@@ -14,6 +14,7 @@ import { SelectModule } from 'ng-select';
 
 import {  ReactiveFormsModule } from '@angular/forms';
 import { ViewUserComponent } from './view-user.component';
+import { ViewUserFilterPipe } from './datafilterpipe';
 // import { RegistereduserRoutingModule } from './registereduser-routing.module';
 // import { RegistereduserComponent } from './registereduser.component';
 // import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
@@ -36,6 +37,6 @@ import { ViewUserComponent } from './view-user.component';
     ModalModule.forRoot(),
     AlertModule.forRoot(),
   ],
-  declarations: [ ViewUserComponent ]
+  declarations: [ ViewUserComponent,ViewUserFilterPipe]
 })
 export class RegistereduserModule { }

@@ -11,7 +11,8 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <!-- <table id="example" class="table table-striped table-bordered" style="width:100%" class="table table-striped" [mfData]="deckList |  filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10"> -->
+                            <table class="table" [mfData]="deckList | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                                 <thead>
                                     <tr>
                                         <th>Deck Name</th>
@@ -23,7 +24,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of deckList; let i = index">
+                                    <tr *ngFor="let item of mf.data; let i = index">
                                         <!-- {{item | json}} -->
                                         <td>{{item.name}}</td>
                                         <td>{{item.description}}</td>
@@ -49,8 +50,15 @@
                                         <a [routerLink]="[item.username+'/contact']">Go to details</a>
                                     </td> -->
                                     </tr>
-
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7">
+                                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]">
+                                            </mfBootstrapPaginator>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

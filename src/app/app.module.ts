@@ -37,6 +37,7 @@ import { FolderComponent } from './view/folder/folder.component';
 import { LessonComponent } from './view/lesson/lesson.component';
 import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { DeckFilterPipe } from './view/deck/datafilterpipe';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -79,7 +80,8 @@ export function provideConfig() {
     AttachmentComponent,
     FolderComponent,
     LessonComponent,
-    PaypalDemoComponent
+    PaypalDemoComponent,
+    DeckFilterPipe
   ],
   imports: [
     BrowserModule,
