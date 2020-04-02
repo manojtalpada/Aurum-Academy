@@ -11,7 +11,9 @@ import { FormBuilder } from '@angular/forms';
 export class DeckComponent implements OnInit {
   public deckList;
   deck : any = {};
+  dataFilter;
   public cards: any=[];
+  public filterQuery = "";
   public addcards = false;
   userid = sessionStorage.getItem('userid');
   constructor(private fb: FormBuilder,private aunumservices: AunumService,private _route: ActivatedRoute) {

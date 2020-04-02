@@ -6,13 +6,11 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal'
   styleUrls: ['./paypal-demo.component.css']
 })
 export class PaypalDemoComponent implements OnInit {
-
+  public payPalConfig?: IPayPalConfig;
+  
   constructor() { }
 
-  // ngOnInit() {
-  // }
 
-  public payPalConfig?: IPayPalConfig;
 
     ngOnInit(): void {
       this.initConfig();
