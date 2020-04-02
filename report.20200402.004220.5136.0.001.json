@@ -1,0 +1,349 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200402.004220.5136.0.001.json",
+    "dumpEventTime": "2020-04-02T00:42:34Z",
+    "dumpEventTimeStamp": "1585768354221",
+    "processId": 5136,
+    "cwd": "E:\\git\\Aurum-Academy",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Redspark\\AppData\\Roaming\\npm/node_modules/@angular/cli/bin/ng",
+      "serve"
+    ],
+    "nodejsVersion": "v12.14.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.14.0",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.14.0/node-v12.14.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.14.0/node-v12.14.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.14.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "6.1.7601",
+    "osVersion": "Windows 7 Professional Service Pack 1",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM)2 Duo CPU     E7500  @ 2.93GHz",
+        "speed": 2933,
+        "user": 7460903,
+        "nice": 0,
+        "sys": 6079889,
+        "idle": 42960148,
+        "irq": 72868
+      },
+      {
+        "model": "Intel(R) Core(TM)2 Duo CPU     E7500  @ 2.93GHz",
+        "speed": 2933,
+        "user": 6981965,
+        "nice": 0,
+        "sys": 5372112,
+        "idle": 44145896,
+        "irq": 45833
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Local Area Connection",
+        "internal": false,
+        "mac": "00:27:0e:2b:ec:69",
+        "address": "192.168.29.117",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "Redspark-PC"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x000000013f781729",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013f785b4c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013f784b08",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013f87369b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00000001400782de",
+      "symbol": ""
+    },
+    {
+      "pc": "0x0000000140060321",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013ff2dbec",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013ff35cf1",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013ff2b353",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013ff29b24",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013ff4adf5",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000000013fcb6e19",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00000001404a404d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x0000001d0296f23c",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 342814720,
+    "totalCommittedMemory": 342814720,
+    "usedMemory": 323758072,
+    "availableMemory": 1854146200,
+    "memoryLimit": 2177892352,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047488,
+        "used": 1047408,
+        "available": 80
+      },
+      "old_space": {
+        "memorySize": 261992448,
+        "committedMemory": 261992448,
+        "capacity": 261521712,
+        "used": 251727872,
+        "available": 9793840
+      },
+      "code_space": {
+        "memorySize": 3833856,
+        "committedMemory": 3833856,
+        "capacity": 3530400,
+        "used": 3300224,
+        "available": 230176
+      },
+      "map_space": {
+        "memorySize": 11014144,
+        "committedMemory": 11014144,
+        "capacity": 11002208,
+        "used": 3234800,
+        "available": 7767408
+      },
+      "large_object_space": {
+        "memorySize": 64040960,
+        "committedMemory": 64040960,
+        "capacity": 63864976,
+        "used": 63864976,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 550496,
+        "used": 550496,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047488,
+        "used": 0,
+        "available": 1047488
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 48.001,
+    "kernelCpuSeconds": 8.034,
+    "cpuConsumptionPercent": 0.160228,
+    "maxRss": 702283776,
+    "pageFaults": {
+      "IORequired": 382240,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 6053,
+      "writes": 1
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Redspark\\AppData\\Roaming",
+    "COLORTERM": "truecolor",
+    "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "REDSPARK-PC",
+    "COMSPEC": "C:\\Windows\\system32\\cmd.exe",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "EXEPATH": "C:\\Program Files\\Git\\bin",
+    "FP_NO_HOST_CHECK": "NO",
+    "GOOGLE_DEFAULT_CLIENT_ID": "no",
+    "GOOGLE_DEFAULT_CLIENT_SECRET": "no",
+    "HOME": "C:\\Users\\Redspark",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Redspark",
+    "LANG": "en_US.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\Redspark\\AppData\\Local",
+    "LOGONSERVER": "\\\\REDSPARK-PC",
+    "MSYSTEM": "MINGW64",
+    "NUMBER_OF_PROCESSORS": "2",
+    "OS": "Windows_NT",
+    "PATH": "C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Redspark\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Program Files\\nodejs;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Git\\cmd;C:\\Users\\Redspark\\AppData\\Roaming\\npm;C:\\Users\\Redspark\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Redspark\\AppData\\Roaming\\Composer\\vendor\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PLINK_PROTOCOL": "ssh",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 23 Stepping 10, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "170a",
+    "PROGRAMFILES": "C:\\Program Files",
+    "PSModulePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\",
+    "PUBLIC": "C:\\Users\\Public",
+    "PWD": "E:/git/Aurum-Academy",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "SESSIONNAME": "Console",
+    "SHLVL": "2",
+    "SYSTEMDRIVE": "C:",
+    "SYSTEMROOT": "C:\\Windows",
+    "TEMP": "C:\\Users\\Redspark\\AppData\\Local\\Temp",
+    "TERM": "cygwin",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.43.2",
+    "TMP": "C:\\Users\\Redspark\\AppData\\Local\\Temp",
+    "USERDOMAIN": "Redspark-PC",
+    "USERNAME": "Redspark",
+    "USERPROFILE": "C:\\Users\\Redspark",
+    "WEBPACK_DEV_SERVER": "true",
+    "WINDIR": "C:\\Windows",
+    "_": "C:/Program Files/nodejs/node",
+    "windows_tracing_flags": "3",
+    "windows_tracing_logfile": "C:\\BVTBin\\Tests\\installpackage\\csilogfile.log"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\system32\\kernel32.dll",
+    "C:\\Windows\\system32\\KERNELBASE.dll",
+    "C:\\Windows\\system32\\dbghelp.dll",
+    "C:\\Windows\\system32\\msvcrt.dll",
+    "C:\\Windows\\system32\\WS2_32.dll",
+    "C:\\Windows\\system32\\RPCRT4.dll",
+    "C:\\Windows\\system32\\NSI.dll",
+    "C:\\Windows\\system32\\ADVAPI32.dll",
+    "C:\\Windows\\SYSTEM32\\sechost.dll",
+    "C:\\Windows\\system32\\USER32.dll",
+    "C:\\Windows\\system32\\GDI32.dll",
+    "C:\\Windows\\system32\\LPK.dll",
+    "C:\\Windows\\system32\\USP10.dll",
+    "C:\\Windows\\system32\\IPHLPAPI.DLL",
+    "C:\\Windows\\system32\\WINNSI.DLL",
+    "C:\\Windows\\system32\\PSAPI.DLL",
+    "C:\\Windows\\system32\\USERENV.dll",
+    "C:\\Windows\\system32\\profapi.dll",
+    "C:\\Windows\\system32\\CRYPT32.dll",
+    "C:\\Windows\\system32\\MSASN1.dll",
+    "C:\\Windows\\system32\\bcrypt.dll",
+    "C:\\Windows\\system32\\WINMM.dll",
+    "C:\\Windows\\system32\\IMM32.DLL",
+    "C:\\Windows\\system32\\MSCTF.dll",
+    "C:\\Windows\\system32\\api-ms-win-core-synch-l1-2-0.DLL",
+    "C:\\Windows\\system32\\powrprof.dll",
+    "C:\\Windows\\system32\\SETUPAPI.dll",
+    "C:\\Windows\\system32\\CFGMGR32.dll",
+    "C:\\Windows\\system32\\OLEAUT32.dll",
+    "C:\\Windows\\system32\\ole32.dll",
+    "C:\\Windows\\system32\\DEVOBJ.dll",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\wshtcpip.dll",
+    "C:\\Windows\\System32\\wship6.dll",
+    "C:\\Windows\\system32\\bcryptprimitives.dll",
+    "C:\\Windows\\system32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\system32\\dhcpcsvc.DLL",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\system32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\cryptbase.dll",
+    "C:\\Windows\\system32\\rasadhlp.dll",
+    "C:\\Windows\\System32\\fwpuclnt.dll",
+    "C:\\Windows\\system32\\apphelp.dll"
+  ]
+}

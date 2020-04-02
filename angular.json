@@ -24,9 +24,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap-markdown/css/bootstrap-markdown.min.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap-markdown/js/bootstrap-markdown.js"
+
+            ]
           },
           "configurations": {
             "production": {
