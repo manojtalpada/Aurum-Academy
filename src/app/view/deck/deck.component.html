@@ -143,8 +143,7 @@
                 <div class="col-sm-12">
                     <div class="heading">
                         <h3>Flashcards in “{{ deck.name }}”</h3>
-                        <a (click)="addcards = false" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a
-            >
+                        <a (click)="addcards = false" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a>
 
             <a (click)="editorModel.show()" class="btn btn-primary float-right"
               ><span class="fa fa-random"></span> Switch to Advance Editor</a
@@ -156,39 +155,40 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Question</label>
                     <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-sm-4">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Answer</label>
                     <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="text-left">
-                  <button
-                    class="btn btn-primary"
-                    (click)="addCardslist($event)"
-                  >
-                    Add Card
-                  </button>
-                </div>
+                    <button
+                      class="btn btn-primary"
+                      (click)="addCardslist()">
+                      Add Card
+                    </button>
+                  </div>
               </div>
+            
+              <form #cardForm="ngForm" class="container mt-3"  >
 
               <div *ngFor="let item of cards; let i = index">
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label>Question</label>
-                      <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
+                      <label>Question1</label>
+                      <input type="text" [(ngModel)]="item.side1"   name="side1_{{i}}"   placeholder="Please enter Question" class="form-control"/>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Answer</label>
-                      <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
+                      <input type="text" [(ngModel)]="item.side2"   name="side2_{{i}}" placeholder="Please  enter Answer" class="form-control"/>
                     </div>
                   </div>
 
@@ -196,23 +196,29 @@
                     <div class="form-group">
                       <label></label>
                       <div class="action-buttons text-left">
-                        <a
-                          href="#"
+                        <a href="#"
                           data-toggle="modal"
                           (click)="removeCard(item)"
-                          class="btn btn-danger"
-                          ><span class="mdi mdi-close"></span
-                        ></a>
-                    </div>
+                          class="btn btn-danger"><span class="mdi mdi-close"></span></a>
+                         
+                    </div> 
+                    <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);editorModel.show()" placeholder="d.ff">
+                        <option value="" selected>Select Editor </option>
+                        <option *ngFor='let editor of editorList;let i = index'
+                        [ngValue]="editor" value="{{ editor.id }}">
+                        {{ editor.name }}</option>
+                    </select>
                 </div>
             </div>
         </div>
 </div>
-
-<!-- </div> -->
 <div class="text-left">
     <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
 </div>
+</form>
+
+<!-- </div> -->
+
 </div>
 </div>
 </div>
@@ -236,7 +242,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div *ngIf="wysiwg" class="form-group">
                                 <header class="header">
                                     <h1>WYSIWYG editor</h1>
                                     <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
@@ -247,11 +253,11 @@
                                     {{ htmlContent }}
                                 </div>
                                 <button type="button" class="btn btn-info float-right" (click)="sendData()">
-                  Submit
-                </button>
+                                    Submit
+                                </button>
                             </div>
 
-                            <div class="form-group">
+                            <div *ngIf="markdwn" class="form-group">
                                 <header class="header">
                                     <h1>Markdown editor</h1>
                                     <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
@@ -284,7 +290,7 @@
                 </button>
                             </div>
 
-                            <div class="form-group">
+                            <div *ngIf="ckeditor" class="form-group">
                                 <header class="header">
                                     <h1>CK editor</h1>
                                     <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
