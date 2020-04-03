@@ -22,13 +22,14 @@ export class DeckComponent implements OnInit {
   markdownText: string;
   showEditor = true;
   public Editor = ClassicEditor
-
+  public markdown : any = 'markdown';
   card : any = {};
   public deckList;
   public cardList;
   public deckbycardList;
   deck : any = {};
   public ap: boolean = false;
+  public markdownTextdata : any ={};
   dataFilter;
   public cards: any=[];
   public filterQuery = "";
@@ -38,7 +39,7 @@ export class DeckComponent implements OnInit {
     this.getAllDeck();
     this.getAllCard();
     this.buildForm(this.markdownText);
-
+    // alert(this.markdownText);
     this.form = fb1.group({
       // name: ['John'],
       // surname: ['Doe'],
@@ -54,6 +55,7 @@ export class DeckComponent implements OnInit {
       savable: false,
       onShow: (e) => this.bsEditorInstance = e,
       parser: (val) => this.parse(val)
+      
     };
   }
 // config: AngularEditorConfig = {
@@ -149,14 +151,14 @@ public config = {
 };
   buildForm(markdownText) {
     this.templateForm = this.fb.group({
-      body: [markdownText],
+      body: [markdownText],      
       isPreview: [true]
     });
   }
   parse(inputValue: string) {
     const markedOutput = this.markdownService.compile(inputValue.trim());
     this.highlight();
-
+    alert(markedOutput);
     return markedOutput;
   }
   
@@ -182,6 +184,7 @@ public config = {
     this.templateForm.valueChanges.subscribe(formData => {
       if (formData) {
         this.markdownText = formData.body;
+        alert(this.markdownText);
       }
     });
   }
@@ -381,5 +384,21 @@ error => {
 
  addanswer() {
   this.ap = !this.ap;
+}
+data(values){
+
+ this.markdownText = values;
+ alert(this.markdownText)
+}
+
+sendMarkData(){
+  var backdata = this.markdownText;
+  console.log(backdata);
+  alert(backdata)
+  alert(this.markdown);
+this.card.side1=backdata;
+}
+onReady(){
+  alert(this.markdown);
 }
 }

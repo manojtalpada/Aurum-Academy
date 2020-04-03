@@ -158,13 +158,27 @@
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label>Question</label>
-                    <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
-                  </div>
+                    <!-- <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/> <button type="submit"><i class="fa fa-search"></i></button>
+                    <button type="submit"><i class="fa fa-search"></i></button> -->
+                    <form class="example"  style="margin:auto;max-width:300px">
+                        <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
+                      <button (click)="data(card.side1);editorModel.show()" type="submit"><i>add</i></button>
+                      <div markdown [data]="markdownText"></div>
+                    </form>
+                </div>
+                <!-- <p>Centered inside a form with max-width:</p> -->
+
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label>Answer</label>
-                    <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
+
+                    <form class="example"  style="margin:auto;max-width:300px">
+                        <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
+                        
+                        <button (click)="editorModel.show()" type="submit"><i>add</i></button>
+                    </form>
+                   
                   </div>
                 </div>
                 <div class="text-left">
@@ -209,6 +223,7 @@
         </div>
 </div>
 
+
 <!-- </div> -->
 <div class="text-left">
     <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
@@ -236,10 +251,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <header class="header">
                                     <h1>WYSIWYG editor</h1>
-                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                                    <p>Native WYSIWYG editor for Angular 6+</p>
                                 </header>
                                 <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
                                 <h5 class="html-header">HTML Output</h5>
@@ -249,7 +264,7 @@
                                 <button type="button" class="btn btn-info float-right" (click)="sendData()">
                   Submit
                 </button>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <header class="header">
@@ -269,7 +284,7 @@
                                 <form [formGroup]="templateForm" novalidate>
                                     <div class="editor">
                                         <label>Editor</label>
-                                        <angular-markdown-editor textareaId="editor1" [options]="editorOptions" rows="12" formControlName="body">
+                                        <angular-markdown-editor textareaId="editor1" [(ngModel)]="markdownText" [options]="editorOptions" rows="12" formControlName="body">
                                         </angular-markdown-editor>
                                     </div>
                                 </form>
@@ -278,21 +293,25 @@
                                 <h3 class="text-success bold">Preview</h3>
                                 <div class="result-preview outline">
                                     <markdown [data]="markdownText"></markdown>
+                                    <textarea [(ngModel)]="markdownText"></textarea>
+                                    <!-- <div [(ngModel)]="markdownText"></div> -->
+                                    <div markdown [data]="markdownText"></div>
+
                                 </div>
                                 <button type="button" class="btn btn-info float-right" (click)="sendMarkData()">
                   Submit
                 </button>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <header class="header">
-                                    <h1>CK editor</h1>
-                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
-                                </header>
-                                <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm">
-                                    <!-- <h3>User profile form</h3> -->
+                                    <h1>CK editor</h1> -->
+                            <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                            <!-- </header>
+                                <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm"> -->
+                            <!-- <h3>User profile form</h3> -->
 
-                                    <!-- <div>
+                            <!-- <div>
                                                 <label for="name">Name</label>
                                                 <input formControlName="name" type="text" name="name" id="name">
                                             </div>
@@ -302,7 +321,7 @@
                                                 <input formControlName="surname" type="text" name="surname" id="surname">
                                             </div> -->
 
-                                    <label for="description">Description</label>
+                            <!-- <label for="description">Description</label>
                                     <ckeditor formControlName="description" [editor]="Editor" [config]="config" id="description" name="description">
                                     </ckeditor>
 
@@ -315,18 +334,18 @@
 
                                     <p>
                                         <button type="reset" (click)="reset()">Reset form</button>
-                                    </p>
-                                    <!-- <p><button type="submit">Submit this form</button> <em>(Open the console first)</em></p> -->
-                                    <button type="submit" class="btn btn-info float-right">
+                                    </p> -->
+                            <!-- <p><button type="submit">Submit this form</button> <em>(Open the console first)</em></p> -->
+                            <!-- <button type="submit" class="btn btn-info float-right">
                     Submit
                   </button>
-                                </form>
+                                </form> -->
 
-                                <h3>Form data preview</h3>
+                            <!-- <h3>Form data preview</h3>
                                 <pre style="width: 100%; overflow: auto;">{{
                   form.value | json
                 }}</pre>
-                            </div>
+                            </div> -->
                             <!-- <div class="form-group">
                                 <label for="name"> Course Name</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="course.name" #name="ngModel" name="name" placeholder="Enter your Course">
@@ -344,119 +363,89 @@
                                 <label for="name">url_slug</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug">
                             </div> -->
+                            <!-- </div> -->
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">
             Close
           </button>
-                    <button type="button" class="btn btn-primary" (click)="AddCourse(); editorModel.hide()">
+                        <button type="button" class="btn btn-primary" (click)="AddCourse(); editorModel.hide()">
             Save
           </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
 
-<div class="card-body">
-    <div class="row">
-        <div class="col-md-4" *ngFor="let item of requisitionList">
-            <div class="card card-accent-info">
-                <div class="card-body">
-                    sdfsdfsdfsdfsd
-                    <!-- <p>Requisition ID:{{item.reqId}}</p> -->
-                    <div *ngFor="let itemaa of physiciansList">
-                        <div *ngIf="itemaa._id==item.doctorID[0] then prc">
-                        </div>
-                        <ng-template #prc>
-                            <!-- <p>Docter Name: {{itemaa.name}}</p> -->
-                        </ng-template>
-                    </div>
-                    <div *ngFor="let itemaa of patientsList">
-                        <div *ngIf="itemaa._id==item.patientSysID then prc">
-                        </div>
-                        <ng-template #prc>
-                            <!-- <p>Patient Name:{{itemaa.firstname}}</p>
-                            <p>Clinic Name: {{itemaa.clinicname}}</p> -->
-                        </ng-template>
-                    </div>
-                </div>
-                <!-- <td>
-          <button type="button" class="btn btn-primary float-right"
-            (click)="getRequisition(item);assignModel.show();">Assign</button></td> -->
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
-<div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header appoint-head-color">
-                <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+    <div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header appoint-head-color">
+                    <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
                 </h4>
                 <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
                 </h4> -->
-                <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
+                    <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <div class="row" *ngFor="let item of deckbycardList; let i = index">
-                        <div class="col-sm-12 col-md-12">
-                            <!-- Card -->
-                            <div class="card-deck">
-                                <div class="card-accent-info">
-                                    <!-- Card image -->
-                                    <!-- <div class="view overlay">
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="row" *ngFor="let item of deckbycardList; let i = index">
+                            <div class="col-sm-12 col-md-12">
+                                <!-- Card -->
+                                <div class="card-deck">
+                                    <div class="card-accent-info">
+                                        <!-- Card image -->
+                                        <!-- <div class="view overlay">
                                     <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
                                     <a href="#!">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
                                 </div> -->
-                                    <!-- Card content -->
-                                    <div class="card-body-deck" *ngIf="!ap">
-                                        <!-- Title -->
-                                        <h4 class="card-title">{{item.side1}}</h4>
-                                        <!-- Text -->
-                                        <p class="card-text"> </p>
-                                        <!-- Button -->
+                                        <!-- Card content -->
+                                        <div class="card-body-deck" *ngIf="!ap">
+                                            <!-- Title -->
+                                            <h4 class="card-title">{{item.side1}}</h4>
+                                            <!-- Text -->
+                                            <p class="card-text"> </p>
+                                            <!-- Button -->
+
+                                        </div>
+                                        <div class="card-body-deck" *ngIf="ap">
+                                            <!-- Title -->
+                                            <h4 class="card-title">{{item.side2}}</h4>
+                                            <!-- Text -->
+                                            <p class="card-text"> </p>
+                                            <!-- Button -->
+
+                                        </div>
 
                                     </div>
-                                    <div class="card-body-deck" *ngIf="ap">
-                                        <!-- Title -->
-                                        <h4 class="card-title">{{item.side2}}</h4>
-                                        <!-- Text -->
-                                        <p class="card-text"> </p>
-                                        <!-- Button -->
-
-                                    </div>
-
                                 </div>
-                            </div>
-                            <!-- Card -->
+                                <!-- Card -->
 
-                            <!-- Card -->
-                            <div class="btn-content modal-content">
-                                <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
-                                <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
-                            </div>
+                                <!-- Card -->
+                                <div class="btn-content modal-content">
+                                    <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
+                                    <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
