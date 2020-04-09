@@ -10,47 +10,60 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <p-treeTable [value]="files2" [columns]="cols"  >
+                            <ng-template pTemplate="header"  >
+                                <tr>
+                                    <!-- <th *ngFor="let col of columns">
+                                        {{col.header}}
+                                    </th> -->
+                                    <th>Folder Name</th>
+                                    <th>Parent ID</th> 
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                                <tr>
+                                  
+                                    <td *ngFor="let col of columns; let i = index">
+                                        
+                                        <a href="#" *ngIf="rowData.parent_id && i==0" data-toggle="modal" (click)="onLesson(rowNode.node.data);lessonModel.show()" class="btn btn-success"><span class="mdi mdi-plus"></span></a>
+                                        <p-treeTableToggler  [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                                         {{rowData[col.field]}}
+                                         
+                                    </td>
+                                    <td>
+                                        <div *ngIf="rowData.parent_id" class="action-buttons">
+                                            <a href="#" data-toggle="modal" (click)="openFolderModel(rowNode.node.data);addModel.show();" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span></a>
+                                            <a href="#" data-toggle="modal" (click)="openFolderModel(rowNode.node.data);deleteFolder();" class="btn btn-danger"><span class="mdi mdi-close"></span></a>
+                                        </div>
+                                     </td> 
+                                </tr>            
+                            </ng-template>
+                        </p-treeTable>
+                        <!-- <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Folder Name</th>
-                                    <th>Parent ID</th>
-                                    <!-- <th>Permission</th>
-                                <th>url_slug</th> -->
+                                    <th>Parent ID</th> 
                                     <th>Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of folderlist; let i = index">
-                                    <!-- {{item | json}} -->
-                                    <td>{{item.name}}</td>
-                                    <td>{{item.parent_id}}</td>
-                                    <!-- <td>{{item.permission}}</td>
-                                <td>{{item.url_slug}}</td> -->
-                                    <!-- <td>{{item.birthdate | date: "dd/MM/yyyy"}}</td> -->
+                                    <a  (click)="onLesson(item);lessonModel.show()"> <td>{{item.name}}</td></a>
+                                    <td>{{item.parent_id}}</td> 
 
                                     <td>
                                         <div class="action-buttons">
                                             <a href="#" data-toggle="modal" (click)="openFolderModel(item);addModel.show();" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span></a>
                                             <a href="#" data-toggle="modal" (click)="openFolderModel(item);deleteFolder();" class="btn btn-danger"><span class="mdi mdi-close"></span></a>
                                         </div>
-                                        <!-- <button type="button" class="btn btn-primary" (click)="addcard();openDeckModel(item);">AddCard</button> -->
-                                    </td>
-                                    <!-- <td>
-                                    <button type="button" (click)="editModal.show()" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
-                                        <i class="fa fa-edit"></i>
-                                      </button>
-                                </td> -->
-
-
-                                    <!-- <td>
-                                    <a [routerLink]="[item.username+'/contact']">Go to details</a>
-                                </td> -->
+                                     </td>  
                                 </tr>
 
                             </tbody>
-                        </table>
+                        </table> -->
                     </div>
                 </div>
             </div>
@@ -101,6 +114,54 @@
                     <button type="button" class="btn btn-primary" *ngIf="folder.id == null" (click)="AddFolder();addModel.hide()">Save</button>
                     <button type="button" (click)="updateFolder();addModel.hide()" *ngIf="folder.id != null" class="btn btn-primary">Update
                         Folder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #lessonModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color"  ><i class="fa fa-plus-circle" aria-hidden="true"></i>Create Lesson</h4>
+                <!-- <h4 class="modal-title appoint-color" *ngIf="lesson.id != null"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Lesson</h4> -->
+                <button type="button" class="close" (click)="lessonModel.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name"> Lesson Name</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="lesson.name" #name="ngModel" name="name" placeholder="Enter your Course">
+
+                                <label for="name">Description</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="lesson.description" #description="ngModel" name="description" placeholder="Enter description">
+
+                                <!-- <div class="form-group">
+                                    <label for="select1">Select your Permission</label>
+                                    <fieldset class="form-group">
+                                        <ng-select name="permission" [(ngModel)]="course.permission" #permission="ngModel" placeholder="Select your permission" [options]="type" [allowClear]="true"></ng-select>
+                                    </fieldset>
+                                </div> -->
+
+                                <!-- <label for="name">url_slug</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug"> -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)=" addModel.hide()">Close</button>
+                    <button type="button" class="btn btn-primary"  (click)="addLesson();lessonModel.hide()">Save</button>
+                    <!-- <button type="button" (click)="updateLesson();addModel.hide()" *ngIf="lesson.id != null" class="btn btn-primary">Update
+                        </button> -->
                 </div>
             </div>
         </div>

@@ -12,14 +12,19 @@ export class AunumService {
 
 
     registerInsert(user){
-        return this.http.post<any>(appConfig.apiUrl+'/user_register', user)
+        return this.http.post<any>(appConfig.apiUrl+'/user', user)
         .map(res => {
             return res;
         });
         // return this.http.post(`${this.baseUrl}/user`,JSON.stringify(data),this.options);   
     
     }
-
+    registerUpdate(user){
+        return this.http.post<any>(appConfig.apiUrl+'/user', user)
+        .map(res => {
+            return res;
+        });
+    }
     getAllUsers(data){
         return this.http.post<any>(appConfig.apiUrl+'/user/',data)
         .map(res => {

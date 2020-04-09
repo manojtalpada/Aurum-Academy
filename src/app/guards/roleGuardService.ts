@@ -11,7 +11,7 @@ export class RoleGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
 
     // this will be passed from the route config
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (!token){
       this.router.navigate(['/login']);
       return false;      
@@ -19,20 +19,24 @@ export class RoleGuardService implements CanActivate {
     const tokenPayload = decode(token);
     let expectedRoleArray = route.data;
     expectedRoleArray = expectedRoleArray.expectedRole;
-    const userType = tokenPayload.user.userType;
+    // const userType = tokenPayload.user.user_type;
+    const userType = tokenPayload.user_type;
+
     let  expectedRole = '';
  
     for(let i=0; i<expectedRoleArray.length; i++){
-      if(expectedRoleArray[i] == tokenPayload.user.userType){
+      if(expectedRoleArray[i] == tokenPayload.user_type){
        // console.log("Roles Matched");
-        expectedRole = tokenPayload.user.userType;
+        // expectedRole = tokenPayload.user.user_type;
+        expectedRole = tokenPayload.user_type;
+
       }
     }
 
-    if (this.auth.isAuthenticated() || userType != expectedRole) {   
-      return false;
+    if (this.auth.isAuthenticated() || userType == expectedRole) {   
+      return true;
     }   
-    return true;
+    return false;
   }
 
 }

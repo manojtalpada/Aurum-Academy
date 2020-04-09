@@ -104,6 +104,9 @@ export class UserService {
                 sessionStorage.setItem('token', JSON.stringify(data.data.token));
                 sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
                 sessionStorage.setItem('userid',JSON.stringify(data.data.result.id))
+                sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
+
+
              }
              console.log(data)
             return data;
@@ -130,6 +133,8 @@ export class UserService {
                 sessionStorage.setItem('token', JSON.stringify(data.data.token));
                 sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
                 sessionStorage.setItem('userid',JSON.stringify(data.data.result.id));
+                sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
+
              }
             
             return data;
