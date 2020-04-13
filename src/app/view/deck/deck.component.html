@@ -48,12 +48,12 @@
                         <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
                         ></a>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item)">
+                    <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item);clearInputMethod1();">
                         AddCard
                       </button>
                     </td>
                     <td>
-                        <button type="button" (click)="ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
+                        <button type="button" (click)="openDeckModel(item);ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                                           </button>
                     </td>
@@ -143,11 +143,9 @@
                 <div class="col-sm-12">
                     <div class="heading">
                         <h3>Flashcards in “{{ deck.name }}”</h3>
-                        <a (click)="addcards = false" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a
-            >
+                        <a (click)="addcards = false;clearInputMethod1();" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a>
 
-            <a (click)="editorModel.show()" class="btn btn-primary float-right"
-              ><span class="fa fa-random"></span> Switch to Advance Editor</a
+                        <a (click)="editorModel.show()" class="btn btn-primary float-right"><span class="fa fa-random"></span> Switch to Advance Editor</a
             >
           </div>
           <div class="card">
@@ -156,78 +154,101 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Question</label>
-                    <!-- <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/> <button type="submit"><i class="fa fa-search"></i></button>
-                    <button type="submit"><i class="fa fa-search"></i></button> -->
-                    <form class="example"  style="margin:auto;max-width:300px">
-                        <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
-                      <button (click)="data(card.side1);editorModel.show()" type="submit"><i>add</i></button>
-                      <div markdown [data]="markdownText"></div>
-                    </form>
-                </div>
-                <!-- <p>Centered inside a form with max-width:</p> -->
-
+                    <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
+                  </div> -->
                 </div>
                 <div class="col-sm-4">
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Answer</label>
-
-                    <form class="example"  style="margin:auto;max-width:300px">
-                        <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
-                        
-                        <button (click)="editorModel.show()" type="submit"><i>add</i></button>
-                    </form>
-                   
-                  </div>
+                    <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
+                  </div> -->
                 </div>
                 <div class="text-left">
-                  <button
-                    class="btn btn-primary"
-                    (click)="addCardslist($event)"
-                  >
-                    Add Card
-                  </button>
-                </div>
+                    <button
+                      class="btn btn-primary"
+                      (click)="initGroup()">
+                      Add Card
+                    </button>
+                  </div>
               </div>
+            
 
-              <div *ngFor="let item of cards; let i = index">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>Question</label>
-                      <input type="text" [(ngModel)]="card.side1" #side1="ngModel" name="side1" placeholder="Please enter Question" class="form-control"/>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>Answer</label>
-                      <input type="text" [(ngModel)]="card.side2" #side1="ngModel" name="side2" placeholder="Please  enter Answer" class="form-control"/>
-                    </div>
-                  </div>
+<form [formGroup]="addForm">
+    <div formArrayName="rows">   
+                <div *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
 
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label></label>
-                      <div class="action-buttons text-left">
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          (click)="removeCard(item)"
-                          class="btn btn-danger"
-                          ><span class="mdi mdi-close"></span
-                        ></a>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Question</label>
+                                        <input type="text" class="form-control" formControlName="side1">
+                                        <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show()" type="submit"><i>add</i></button> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Editor</label>
+                                        <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value.rows,i);editorModel.show()" placeholder="d.ff">
+                                            <option value="" selected>Select Editor </option>
+                                            <option *ngFor='let editor of editorList;let i = index'
+                                            [ngValue]="editor" value="{{ editor.id }}">
+                                            {{ editor.name }}</option>
+                                        </select>             
+                                    </div>
+                              </div>                          
+                        </div>          
                     </div>
-                </div>
-            </div>
+        <div class="col-md-5">
+             <div class="row">
+                <div class="col-md-8">
+                     <div class="form-group">
+                     <label>Answer</label>
+                         <input type="text" class="form-control" formControlName="side2">
+                          <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show();" type="submit"><i>add</i></button> -->
+                      </div>
+                 </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Editor</label>
+                <select class="form-control" name="practice" id="practice"  (change)="changeEditor($event.target.value);datavalues(addForm.value.rows,i);editorModel.show()" placeholder="d.ff">
+                            <option value="" selected>Select Editor </option>
+                            <option *ngFor='let editor of editorList;let i = index'
+                            [ngValue]="editor" value="{{ editor.id }}">
+                            {{ editor.name }}</option>
+                </select>
+             </div>
         </div>
+    </div>
+</div>
+<div class="col-md-2">    
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label></label>
+        <button type="button" class="btn btn-square btn-danger btn-sm waves-effect waves-light  form-control" (click)="onDeleteRow(i)"> <i class="icofont icofont-ui-delete"></i> Remove</button>
+    </div>
+    </div> 
+</div>
+</div>
+
+</div>
+
 </div>
 
 
-<!-- </div> -->
+
 <div class="text-left">
     <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
 </div>
+</div>
+</form>
+
+<!-- </div> -->
+
 </div>
 </div>
 </div>
@@ -251,6 +272,148 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
+
+                            <!-- WYSIWYG editor -->
+                           
+                                <div  *ngIf="wysiwg" class="form-group">
+                                    <header class="header">
+                                        <h1>WYSIWYG editor</h1>
+                                        <p>Native WYSIWYG editor for Angular 6+</p>
+                                    </header>
+                                    <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+                                    <h5 class="html-header">HTML Output</h5>
+                                    <div class="html">
+                                        {{ htmlContent }}
+                                    </div>
+                                    <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
+                                        Submit
+                                    </button>                              
+                            </div>
+
+                            <!-- WYSIWYG editor end -->
+                            <!-- Markdown editor -->
+
+                            <div *ngIf="markdwn" class="form-group">                               
+                                    <!-- <header class="header">
+                                        <h1>Markdown editor</h1>
+                                        <p>Native WYSIWYG editor for Angular 6+</p>
+                                    </header>
+    
+                                    <div class="row">
+                                        <div class="col-md-6 action-buttons">
+                                            <button class="btn btn-info " (click)="showFullScreen(true)">
+                                             Full Screen Preview
+                                               </button>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <form [formGroup]="templateForm" novalidate>
+                                        <div class="editor">
+                                            <label>Editor</label>
+                                            <angular-markdown-editor textareaId="editor1" [options]="editorOptions" rows="12" [(ngModel)]="markdownText" formControlName="body">
+                                            </angular-markdown-editor>
+                                        </div>
+                                    </form>
+    
+                                       
+                                    <hr />
+                                    <h3 class="text-success bold">Preview</h3>
+                                    <div class="result-preview outline">
+                                        <markdown [data]="markdownText"></markdown>                                  
+                                    </div>
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button> -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h1>Markdown editor</h1>
+                                       
+                                        </div>
+                                        <div class="col-md-6 action-buttons">
+                                            <button class="btn btn-info btn-sm" (click)="showFullScreen(true)">
+                                                Full Screen Preview
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <form novalidate>
+                                        <div class="editor">
+                                            <label>Editor (with French locale)</label>
+                                            <angular-markdown-editor textareaId="editor1" [locale]="locale" [options]="editorOptions" rows="12" name="markdownText" [(ngModel)]="markdownText" (onFullscreenExit)="hidePreview()">
+                                            </angular-markdown-editor>
+                                        </div>
+                                    </form>
+                                    
+                                    <hr />
+                                    <h3 class="text-success bold">Preview</h3>
+                                    <div class="result-preview outline">
+                                        <markdown [data]="markdownText" (ready)="onReady()"></markdown>
+                                    
+                                    </div>
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+                             
+                                </div>
+
+                                <!-- Markdown editor  end-->
+
+                                <!-- CK editor -->
+                            
+                            <div *ngIf="ckeditor" class="form-group">
+                                <div class="form-group">
+                                    <header class="header">
+                                        <h1>CK editor</h1>    
+                                    </header>
+                                    <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm">    
+                                        <label for="description">Description</label>
+                                        <ckeditor formControlName="description" [editor]="Editor" [(ngModel)]="ckeditorText" [config]="config" id="description" name="description">
+                                        </ckeditor>
+    
+                                        <p *ngIf="description?.dirty" class="alert">
+                                            Description is "dirty".
+                                        </p>
+                                        <p *ngIf="description?.touched" class="alert">
+                                            Description has been "touched".
+                                        </p>
+                                        {{no | json}}    
+                                        <p>
+                                            <button type="reset" (click)="reset()">Reset form</button>
+                                        </p>
+    
+                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                    </form>
+    
+                                    <h3>Form data preview</h3>
+    
+                                    <markdown [data]="markdownText"></markdown>
+                                    <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre>
+                                </div>                         
+                        </div>
+
+                        <!-- CK editor end -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">Close</button>
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #editorModeltest="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 1000px;">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Editors
+                </h4>
+                <button type="button" class="close" markdownText={} (click)="editorModeltest.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
                             <!-- <div class="form-group">
                                 <header class="header">
                                     <h1>WYSIWYG editor</h1>
@@ -259,24 +422,24 @@
                                 <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
                                 <h5 class="html-header">HTML Output</h5>
                                 <div class="html">
-                                    {{ htmlContent }}
+                                    {{ htmlContent }} {{editorobject | json}}
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="sendData()">
-                  Submit
-                </button>
+                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
+                                    Submit
+                                </button>
                             </div> -->
 
                             <div class="form-group">
                                 <header class="header">
                                     <h1>Markdown editor</h1>
-                                    <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
+                                    <p>Native WYSIWYG editor for Angular 6+</p>
                                 </header>
 
                                 <div class="row">
                                     <div class="col-md-6 action-buttons">
                                         <button class="btn btn-info " (click)="showFullScreen(true)">
-                      Full Screen Preview
-                    </button>
+                                         Full Screen Preview
+                                           </button>
                                     </div>
                                 </div>
                                 <hr />
@@ -293,36 +456,24 @@
                                 <h3 class="text-success bold">Preview</h3>
                                 <div class="result-preview outline">
                                     <markdown [data]="markdownText"></markdown>
-                                    <textarea [(ngModel)]="markdownText"></textarea>
-                                    <!-- <div [(ngModel)]="markdownText"></div> -->
-                                    <div markdown [data]="markdownText"></div>
-
+                              
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="sendMarkData()">
-                  Submit
-                </button>
+                                <button type="button" class="btn btn-info float-" (click)="sendEditorsdata(no,editorobject);">
+                                                                                                                  Submit
+                                                     </button>
                             </div>
+
+                            <!-- ck Editors Done -->
 
                             <!-- <div class="form-group">
                                 <header class="header">
-                                    <h1>CK editor</h1> -->
-                            <!-- <p>Native WYSIWYG editor for Angular 6+</p> -->
-                            <!-- </header>
-                                <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm"> -->
-                            <!-- <h3>User profile form</h3> -->
+                                    <h1>CK editor</h1>
 
-                            <!-- <div>
-                                                <label for="name">Name</label>
-                                                <input formControlName="name" type="text" name="name" id="name">
-                                            </div>
-                                        
-                                            <div>
-                                                <label for="surname">Surname</label>
-                                                <input formControlName="surname" type="text" name="surname" id="surname">
-                                            </div> -->
+                                </header>
+                                <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm">
 
-                            <!-- <label for="description">Description</label>
-                                    <ckeditor formControlName="description" [editor]="Editor" [config]="config" id="description" name="description">
+                                    <label for="description">Description</label>
+                                    <ckeditor formControlName="description" [editor]="Editor" [(ngModel)]="markdownText" [config]="config" id="description" name="description">
                                     </ckeditor>
 
                                     <p *ngIf="description?.dirty" class="alert">
@@ -331,53 +482,36 @@
                                     <p *ngIf="description?.touched" class="alert">
                                         Description has been "touched".
                                     </p>
+                                    {{no | json}}
 
                                     <p>
                                         <button type="reset" (click)="reset()">Reset form</button>
-                                    </p> -->
-                            <!-- <p><button type="submit">Submit this form</button> <em>(Open the console first)</em></p> -->
-                            <!-- <button type="submit" class="btn btn-info float-right">
-                    Submit
-                  </button>
-                                </form> -->
+                                    </p>
 
-                            <!-- <h3>Form data preview</h3>
-                                <pre style="width: 100%; overflow: auto;">{{
-                  form.value | json
-                }}</pre>
+                                    <button type="submit" class="btn btn-info float-left" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                </form>
+
+                                <h3>Form data preview</h3>
+
+                                <markdown [data]="markdownText"></markdown>
+                                <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre>
                             </div> -->
-                            <!-- <div class="form-group">
-                                <label for="name"> Course Name</label>
-                                <input class="form-control" id="name" type="text" [(ngModel)]="course.name" #name="ngModel" name="name" placeholder="Enter your Course">
-
-                                <label for="name">Description</label>
-                                <input class="form-control" id="name" type="text" [(ngModel)]="course.description" #description="ngModel" name="description" placeholder="Enter description">
-
-                                <div class="form-group">
-                                    <label for="select1">Select your Permission</label>
-                                    <fieldset class="form-group">
-                                        <ng-select name="permission" [(ngModel)]="course.permission" #permission="ngModel" placeholder="Select your permission" [options]="type" [allowClear]="true"></ng-select>
-                                    </fieldset>
-                                </div>
-
-                                <label for="name">url_slug</label>
-                                <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug">
-                            </div> -->
-                            <!-- </div> -->
+                            <!-- ck Editors Done -->
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="editorModeltest.hide()">
             Close
           </button>
-                        <button type="button" class="btn btn-primary" (click)="AddCourse(); editorModel.hide()">
+                    <button type="button" class="btn btn-primary" (click)="editorModel.hide()">
             Save
           </button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -386,66 +520,138 @@
 
 
 
-    <div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header appoint-head-color">
-                    <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+
+<div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
                 </h4>
                 <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
                 </h4> -->
-                    <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
+                <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row" *ngFor="let item of deckbycardList; let i = index">
+                        <div class="col-sm-12 col-md-12">
+                            <!-- Card -->
+<!-- 
+                            <div class="card-deck">
+                                <div class="card-accent-info">
+                                    <div class="action-buttons text-left">
+                                        <a href="#" data-toggle="modal" (click)="removeCardDetails(item)" class="btn btn-danger"><span class="mdi mdi-close"></span></a>
+                        <a href="#" data-toggle="modal" (click)="openCardModel(item);patchValue1(item); UpdateCardModel.show()" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span
+                                      ></a>
+                    </div>
+                    <div class="card-body-deck" *ngIf="!ap">
+                        <h4 class="card-title">
+                            <markdown [data]="item.side1"></markdown>
+                        </h4>
+                        <p class="card-text"> </p>
+
+                    </div>
+                    <div class="card-body-deck" *ngIf="ap">
+                        <h4 class="card-title">
+                            <markdown [data]="item.side2"></markdown>
+                        </h4>
+
+                        <p class="card-text"> </p>
+
+
+                    </div>
+
                 </div>
-                <div class="modal-body">
-                    <div class="card-body">
-                        <div class="row" *ngFor="let item of deckbycardList; let i = index">
-                            <div class="col-sm-12 col-md-12">
-                                <!-- Card -->
-                                <div class="card-deck">
-                                    <div class="card-accent-info">
-                                        <!-- Card image -->
-                                        <!-- <div class="view overlay">
-                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
-                                    <a href="#!">
-                                        <div class="mask rgba-white-slight"></div>
-                                    </a>
-                                </div> -->
-                                        <!-- Card content -->
-                                        <div class="card-body-deck" *ngIf="!ap">
-                                            <!-- Title -->
-                                            <h4 class="card-title">{{item.side1}}</h4>
-                                            <!-- Text -->
-                                            <p class="card-text"> </p>
-                                            <!-- Button -->
+            </div> -->
+            <div class="btn-content modal-content">
+                <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
+                <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
+            </div>
 
-                                        </div>
-                                        <div class="card-body-deck" *ngIf="ap">
-                                            <!-- Title -->
-                                            <h4 class="card-title">{{item.side2}}</h4>
-                                            <!-- Text -->
-                                            <p class="card-text"> </p>
-                                            <!-- Button -->
+        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-                                        </div>
 
+<div bsModal #UpdateCardModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
+                </h4>
+                <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
+                </h4> -->
+                <button type="button" class="close" (click)="UpdateCardModel.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+
+                            <form [formGroup]="addForm">
+                                <div formArrayName="rows">
+                                    <table>
+                                        <tbody>
+                                            <tr *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Question</label>
+                                                            <input type="text" class="form-control" formControlName="side1">
+                                                            <button (click)="datavalues(addForm.value,i);editorModeltest.show()" type="submit"><i>add</i></button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Answer</label>
+                                                            <input type="text" class="form-control" formControlName="side2">
+                                                        </div>
+                                                        <!-- <pre>{{addForm.value.rows | json}}</pre> -->
+                                                        <button (click)="datavalues(side2,i);editorModeltest.show()" type="submit"><i>add</i></button>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- <div class="text-left col-sm-2"> -->
+                                                <td>
+                                                    <button type="button" class="btn btn-square btn-danger btn-sm waves-effect waves-light" (click)="onDeleteRow(i)"> <i class="icofont icofont-ui-delete"></i> Remove</button>
+                                                </td>
+                                                <!-- </div> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="text-left">
+                                        <button class="btn btn-primary" (click)="UpdateCard()">Update</button>
                                     </div>
                                 </div>
-                                <!-- Card -->
+                            </form>
 
-                                <!-- Card -->
-                                <div class="btn-content modal-content">
-                                    <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
-                                    <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
-                                </div>
 
+                            <!-- Card -->
+                            <div class="btn-content modal-content">
+                                <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
+                                <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -247,4 +247,16 @@ export class AunumService {
             return res;
         });
     }
+    UpdateCard(data){
+        return this.http.post<any>(appConfig.apiUrl + '/cards/', data)
+        .map(res => {
+            return res;
+        });
+    }
+    removeCardDetails(data){
+        return this.http.post<any>(appConfig.apiUrl + '/cards/', data)
+        .map(res => {
+            return res;
+        });
+    }
 }
