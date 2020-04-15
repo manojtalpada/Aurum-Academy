@@ -1,0 +1,614 @@
+<div *ngIf="addcards == false">
+    <div *ngIf="Updatecards == false">
+        <app-header></app-header>
+        <section class="section section-content py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="heading">
+                            <h3>Deck Details</h3>
+                            <a (click)="addModel.show(); deck = {}" class="btn btn-primary float-right">+ Create New Deck</a
+            >
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <!-- <table id="example" class="table table-striped table-bordered" style="width:100%" class="table table-striped" [mfData]="deckList |  filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10"> -->
+              <table
+                class="table"
+                [mfData]="deckList | dataFilter: filterQuery"
+                #mf="mfDataTable"
+                [mfRowsOnPage]="5"
+              >
+                <thead>
+                  <tr>
+                    <th>Deck Name</th>
+                    <th>Description</th>
+                    <!-- <th>Permission</th>
+                                    <th>url_slug</th> -->
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mf.data; let i = index">
+                    <!-- {{item | json}} -->
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <!-- <td>{{item.permission}}</td>
+                                    <td>{{item.url_slug}}</td> -->
+                    <!-- <td>{{item.birthdate | date: "dd/MM/yyyy"}}</td> -->
+
+                    <td>
+                      <div class="action-buttons">
+                        <a
+                          href="#"
+                          data-toggle="modal"
+                          (click)="openDeckModel(item); addModel.show()"
+                          class="btn btn-success"
+                          ><span class="mdi mdi-lead-pencil"></span
+                        ></a>
+                            <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
+                        ></a>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item);clearInputMethod1();">
+                        AddCard
+                      </button>
+                        </td>
+                        <td>
+                            <button type="button" (click)="openDeckModel(item);ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                                          </button>
+
+                        </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]">
+                                    </mfBootstrapPaginator>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</section>
+</div>
+</div>
+
+
+
+
+<div bsModal #addModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
+                </h4>
+                <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
+                </h4>
+                <button type="button" class="close" (click)="addModel.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name"> Deck Name</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="deck.name" #name="ngModel" name="name" placeholder="Enter your Deck Name" />
+
+                                <label for="name">Description</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="deck.description" #description="ngModel" name="description" placeholder="Enter description" />
+
+                                <!-- <div class="form-group">
+                                    <label for="select1">Select your Permission</label>
+                                    <fieldset class="form-group">
+                                        <ng-select name="permission" [(ngModel)]="course.permission" #permission="ngModel" placeholder="Select your permission" [options]="type" [allowClear]="true"></ng-select>
+                                    </fieldset>
+                                </div> -->
+
+                                <!-- <label for="name">url_slug</label>
+                                <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug"> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="addModel.hide()">
+            Close
+          </button>
+                    <button type="button" class="btn btn-primary" *ngIf="deck.id == null" (click)="AddDeck(); addModel.hide()">
+            Save
+          </button>
+                    <button type="button" (click)="updateDeck(); addModel.hide()" *ngIf="deck.id != null" class="btn btn-primary">
+            Update Deck
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="addcards == true">
+    <section class="section section-content py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="heading">
+                        <h3>Flashcards in “{{ deck.name }}”</h3>
+                        <a (click)="addcards = false;clearInputMethod1();" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a>
+
+                        <!-- <a (click)="editorModel.show()" class="btn btn-primary float-right"><span class="fa fa-random"></span> Switch to Advance Editor</a> -->
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="text-left">
+                                <button class="btn btn-primary float-right" (click)="initGroup()">
+                      Add Card
+                    </button>
+                            </div>
+                            <form [formGroup]="addForm">
+                                <div formArrayName="rows">
+                                    <div *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Question</label>
+                                                            <input type="text" class="form-control" formControlName="side1">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show()" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value,i,'Q');editorModel.show()" placeholder="d.ff">
+                                            <option value="" selected>Select Editor </option>
+                                            <option *ngFor='let editor of editorList;let i = index'
+                                            [ngValue]="editor" value="{{ editor.id }}">
+                                            {{ editor.name }}</option>
+                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Answer</label>
+                                                            <input type="text" class="form-control" formControlName="side2">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show();" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavaluesans(addForm.value,i,'A');editorModel.show()" placeholder="d.ff">
+                            <option value="" selected>Select Editor </option>
+                            <option *ngFor='let editor of editorList;let i = index'
+                            [ngValue]="editor" value="{{ editor.id }}">
+                            {{ editor.name }}</option>
+                </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label></label>
+                                                            <button type="button" *ngIf="i!=0" class="btn btn-square btn-danger btn-sm waves-effect waves-light  form-control" (click)="onDeleteRow(i)"> <i class="icofont icofont-ui-delete"></i> Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="text-left">
+                                        <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div bsModal #editorModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <!-- <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>Create Deck
+                </h4>
+                <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
+                </h4> -->
+                <button type="button" class="close" (click)="editorModel.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <!-- WYSIWYG editor -->
+
+                            <div *ngIf="wysiwg" class="form-group">
+                                <header class="header">
+                                    <h1>WYSIWYG editor</h1>
+                                    <p>Native WYSIWYG editor for Angular 6+</p>
+                                </header>
+                                <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+                                <h5 class="html-header">HTML Output</h5>
+                                <div class="html">
+                                    {{ htmlContent }}
+                                </div>
+                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
+                                    Submit
+                                </button>
+                            </div>
+
+                            <!-- WYSIWYG editor end -->
+
+
+                            <div *ngIf="markdwn" class="form-group">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h1>Markdown editor</h1>
+
+                                    </div>
+                                    <div class="col-md-6 action-buttons">
+                                        <button class="btn btn-info btn-sm" (click)="showFullScreen(true)">
+                                        Full Screen Preview
+                                    </button>
+                                    </div>
+                                </div>
+                                <form novalidate>
+                                    <div class="editor">
+                                        <label>Editor (with French locale)</label>
+                                        <angular-markdown-editor textareaId="editor1" [locale]="locale" [options]="editorOptions" rows="12" name="markdownText" [(ngModel)]="markdownText" (onFullscreenExit)="hidePreview()">
+                                        </angular-markdown-editor>
+                                    </div>
+                                </form>
+
+                                <hr />
+                                <h3 class="text-success bold">Preview</h3>
+                                <div class="result-preview outline">
+                                    <markdown [data]="markdownText" (ready)="onReady()"></markdown>
+
+                                </div>
+                                <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+
+                            </div>
+
+                            <!-- Markdown editor  end-->
+
+                            <!-- CK editor -->
+
+                            <div *ngIf="ckeditor" class="form-group">
+                                <div class="form-group">
+                                    <header class="header">
+                                        <h1>CK editor</h1>
+                                    </header>
+                                    <form [formGroup]="form" (ngSubmit)="onSubmit()" #demoForm="ngForm">
+                                        <label for="description">Description</label>
+                                        <ckeditor formControlName="description" [editor]="Editor" [(ngModel)]="ckeditorText" [config]="config" id="description" name="description">
+                                        </ckeditor>
+
+                                        <p *ngIf="description?.dirty" class="alert">
+                                            Description is "dirty".
+                                        </p>
+                                        <p *ngIf="description?.touched" class="alert">
+                                            Description has been "touched".
+                                        </p>
+                                        {{no | json}}
+                                        <p>
+                                            <button type="reset" (click)="reset()">Reset form</button>
+                                        </p>
+
+                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                    </form>
+
+                                    <h3>Form data preview</h3>
+
+                                    <markdown [data]="markdownText"></markdown>
+                                    <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre>
+                                </div>
+                            </div>
+
+                            <!-- CK editor end -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" (click)="editorModel.hide()">
+            Close
+          </button>
+                    <button type="button" class="btn btn-primary" *ngIf="deck.id == null" (click)="AddDeck(); addModel.hide()">
+            Save
+          </button>
+                    <button type="button" (click)="updateDeck(); addModel.hide()" *ngIf="deck.id != null" class="btn btn-primary">
+            Update Deck
+          </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div bsModal #ShowModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width:500px;">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <button type="button" class="close" (click)="ShowModel.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div *ngFor="let item of deckbycardList; let i = index">
+                        <!-- <div class="col-sm-12 col-md-12">-->
+                        <!-- Card -->
+                        <div class="card-deck">
+                            <div class="card-accent-info">
+                                <div class="action-buttons text-left">
+                                    <a href="#" data-toggle="modal" (click)="removeCardDetails(item)" class="btn btn-danger"><span class="mdi mdi-close"></span></a>
+                                    <a href="#" data-toggle="modal" (click)="openCardModel(item);patchValue1(item); Updatecardmodal();ShowModel.hide();" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span
+                                      ></a>
+                                </div>
+                                <div class="card-body-deck" *ngIf="!ap">
+                                    <h4 class="card-title">
+                                        <markdown [data]="item.side1"></markdown>
+                                    </h4>
+                                    <p class="card-text"> </p>
+
+                                </div>
+                                <div class="card-body-deck" *ngIf="ap">
+                                    <h4 class="card-title">
+                                        <markdown [data]="item.side2"></markdown>
+                                    </h4>
+
+                                    <p class="card-text"> </p>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="btn-content modal-content">
+                            <a *ngIf="!ap" class="btn btn-primary" (click)="addanswer();">Show Answer</a>
+                            <a *ngIf="ap" class="btn btn-primary" (click)="addanswer();">show Question</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div *ngIf="addcards == true"> -->
+<div *ngIf="Updatecards == true">
+    <section class="section section-content py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="heading">
+                        <h3>Flashcards in “{{ deck.name }}”</h3>
+                        <a (click)="Updatecards = false;clearInputMethod1();" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a>
+
+                        <!-- <a (click)="editorModel.show()" class="btn btn-primary float-right"><span class="fa fa-random"></span> Switch to Advance Editor</a> -->
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+
+                            <!-- <div class="text-left">
+                                <button class="btn btn-primary float-right" (click)="initGroup()">
+                      Add Card
+                    </button>
+                            </div> -->
+                            <form [formGroup]="addForm">
+                                <div formArrayName="rows">
+                                    <div *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Question</label>
+                                                            <input type="text" class="form-control" formControlName="side1">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show()" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value,i,'Q');editorModel.show()" placeholder="d.ff">
+                                            <option value="" selected>Select Editor </option>
+                                            <option *ngFor='let editor of editorList;let i = index'
+                                            [ngValue]="editor" value="{{ editor.id }}">
+                                            {{ editor.name }}</option>
+                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Answer</label>
+                                                            <input type="text" class="form-control" formControlName="side2">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show();" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavaluesans(addForm.value,i,'A');editorModel.show()" placeholder="d.ff">
+                            <option value="" selected>Select Editor </option>
+                            <option *ngFor='let editor of editorList;let i = index'
+                            [ngValue]="editor" value="{{ editor.id }}">
+                            {{ editor.name }}</option>
+                </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label></label>
+                                                            <button type="button" *ngIf="i!=0" class="btn btn-square btn-danger btn-sm waves-effect waves-light  form-control" (click)="onDeleteRow(i)"> <i class="icofont icofont-ui-delete"></i> Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="text-left">
+                                        <button class="btn btn-primary" (click)="UpdateCard()">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- </div> -->
+
+<div bsModal #UpdateCardModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <button type="button" class="close" (click)="UpdateCardModel.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <form [formGroup]="addForm">
+                                <div formArrayName="rows">
+                                    <div *ngFor="let row of addForm.controls.rows.controls; let i = index" [formGroupName]="i">
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Question</label>
+                                                            <input type="text" class="form-control" formControlName="side1">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show()" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="datavaluesUpdate(addForm.value.rows,i);editorModel.show();changeEditor($event.target.value);" placeholder="d.ff">
+                                            <option value="" selected>Select Editor </option>
+                                            <option *ngFor='let editor of editorList;let i = index'
+                                            [ngValue]="editor" value="{{ editor.id }}">
+                                            {{ editor.name }}</option>
+                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label>Answer</label>
+                                                            <input type="text" class="form-control" formControlName="side2">
+                                                            <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show();" type="submit"><i>add</i></button> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Editor</label>
+                                                            <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value.rows,i);editorModel.show();" placeholder="d.ff">
+                            <option value="" selected>Select Editor </option>
+                            <option *ngFor='let editor of editorList;let i = index'
+                            [ngValue]="editor" value="{{ editor.id }}">
+                            {{ editor.name }}</option>
+                </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label></label>
+                                                            <button type="button" *ngIf="i!=0" class="btn btn-square btn-danger btn-sm waves-effect waves-light  form-control" (click)="onDeleteRow(i)"> <i class="icofont icofont-ui-delete"></i> Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="text-left">
+                                        <button class="btn btn-primary" (click)="UpdateCard();UpdateCardModel.hide();">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

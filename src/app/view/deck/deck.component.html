@@ -81,7 +81,7 @@
 </div>
 
 <div bsModal #addModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="max-width:1000px;">
         <div class="modal-content">
             <div class="modal-header appoint-head-color">
                 <h4 class="modal-title appoint-color" *ngIf="deck.id == null">
@@ -186,13 +186,13 @@
                                     <div class="form-group">
                                         <label>Question</label>
                                         <input type="text" class="form-control" formControlName="side1">
-                                        <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show()" type="submit"><i>add</i></button> -->
+                                        <!-- <button (click)="datavalues(addForm.value,i,'Q');editorModeltest.show()" type="submit"><i>add</i></button> -->
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Editor</label>
-                                        <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value.rows,i);editorModel.show()" placeholder="d.ff">
+                                        <select class="form-control" name="practice" id="practice" (change)="changeEditor($event.target.value);datavalues(addForm.value,i,'Q');editorModel.show()" placeholder="d.ff">
                                             <option value="" selected>Select Editor </option>
                                             <option *ngFor='let editor of editorList;let i = index'
                                             [ngValue]="editor" value="{{ editor.id }}">
@@ -208,13 +208,13 @@
                      <div class="form-group">
                      <label>Answer</label>
                          <input type="text" class="form-control" formControlName="side2">
-                          <!-- <button (click)="datavalues(addForm.value.rows,i);editorModeltest.show();" type="submit"><i>add</i></button> -->
+                          <!-- <button (click)="datavaluesans(addForm.value,i,'A');editorModeltest.show();" type="submit"><i>add</i></button> -->
                       </div>
                  </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label>Editor</label>
-                <select class="form-control" name="practice" id="practice"  (change)="changeEditor($event.target.value);datavalues(addForm.value.rows,i);editorModel.show()" placeholder="d.ff">
+                <select class="form-control" name="practice" id="practice"  (change)="changeEditor($event.target.value);datavaluesans(addForm.value,i,'A');editorModel.show()" placeholder="d.ff">
                             <option value="" selected>Select Editor </option>
                             <option *ngFor='let editor of editorList;let i = index'
                             [ngValue]="editor" value="{{ editor.id }}">
@@ -273,7 +273,7 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <!-- WYSIWYG editor -->
+              
                            
                                 <div  *ngIf="wysiwg" class="form-group">
                                     <header class="header">
@@ -290,11 +290,10 @@
                                     </button>                              
                             </div>
 
-                            <!-- WYSIWYG editor end -->
-                            <!-- Markdown editor -->
+                      
 
                             <div *ngIf="markdwn" class="form-group">                               
-                                    <!-- <header class="header">
+                                        <header class="header">
                                         <h1>Markdown editor</h1>
                                         <p>Native WYSIWYG editor for Angular 6+</p>
                                     </header>
@@ -321,7 +320,7 @@
                                     <div class="result-preview outline">
                                         <markdown [data]="markdownText"></markdown>                                  
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button> -->
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button> ->
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h1>Markdown editor</h1>
@@ -351,9 +350,6 @@
                              
                                 </div>
 
-                                <!-- Markdown editor  end-->
-
-                                <!-- CK editor -->
                             
                             <div *ngIf="ckeditor" class="form-group">
                                 <div class="form-group">
@@ -386,7 +382,6 @@
                                 </div>                         
                         </div>
 
-                        <!-- CK editor end -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -398,7 +393,7 @@
     </div>
 </div>
 
-
+<!-- 
 <div bsModal #editorModeltest="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width: 1000px;">
@@ -413,7 +408,7 @@
             <div class="modal-body">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12"> -->
                             <!-- <div class="form-group">
                                 <header class="header">
                                     <h1>WYSIWYG editor</h1>
@@ -428,7 +423,7 @@
                                     Submit
                                 </button>
                             </div> -->
-
+<!-- 
                             <div class="form-group">
                                 <header class="header">
                                     <h1>Markdown editor</h1>
@@ -461,7 +456,7 @@
                                 <button type="button" class="btn btn-info float-" (click)="sendEditorsdata(no,editorobject);">
                                                                                                                   Submit
                                                      </button>
-                            </div>
+                            </div> -->
 
                             <!-- ck Editors Done -->
 
@@ -497,7 +492,7 @@
                                 <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre>
                             </div> -->
                             <!-- ck Editors Done -->
-                        </div>
+                        <!-- </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -511,7 +506,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

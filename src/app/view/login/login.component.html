@@ -11,7 +11,9 @@
         <form class="login-form">
             <input type="text" [(ngModel)]="user.email " name="email " #email="ngModel" placeholder="email " />
             <input type="password" [(ngModel)]="user.password" name="password" #password="ngModel" placeholder="password" />
+          
             <button (click)="logindd();">login</button>
+            <button id="openModalButton" (click)="addModel.show();" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
             <p class="message">Not registered? <a routerLink="/register">Create an account</a></p>
             <p><a routerLink="/forgote">Forgot Password?</a></p>
             <p class="message"><button (click)="signInWithFB('facebook')" class="btn btn-social btn-facebook">
@@ -23,5 +25,40 @@
                 <button class="btn btn-danger" (click)="signOut()">Sign out</button>
             </p> -->
         </form>
+    </div>
+</div>
+
+<div bsModal #addModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                 <h4 class="modal-title appoint-color"  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Select Type</h4>
+                <button type="button" class="close" (click)="addModel.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="select1">Select UserType</label>
+                                <fieldset class="form-group">
+                              <ng-select name="user_type" [(ngModel)]="userType.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
+                                 </fieldset>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)=" addModel.hide()">Close</button>
+                    <button type="button" class="btn btn-primary"   (click)="addUserType();addModel.hide()">Save</button>
+                    <!-- <button type="button" (click)="updateLesson();addModel.hide()" *ngIf="lesson.id != null" class="btn btn-primary">Update
+                        </button> -->
+                </div>
+            </div>
+        </div>
     </div>
 </div>

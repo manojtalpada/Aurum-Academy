@@ -1,21 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { AunumService } from "src/app/services/aunumServices";
-import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from "@angular/forms";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
-import { MarkdownService } from "ngx-markdown";
-import { EditorInstance, EditorOption } from "src/lib/angular-markdown-editor";
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AunumService } from 'src/app/services/aunumServices';
+import { ActivatedRoute } from '@angular/router';
+import { MarkdownService } from 'ngx-markdown';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FolderComponent } from '../folder/folder.component';
+import { EditorInstance, EditorOption } from 'src/lib/angular-markdown-editor';
 
 @Component({
-  selector: "app-deck",
-  templateUrl: "./deck.component.html",
-  styleUrls: ["./deck.component.css"]
+  selector: 'app-deckfile',
+  templateUrl: './deckfile.component.html',
+  styleUrls: ['./deckfile.component.css']
 })
+export class DeckfileComponent implements OnInit {
 
-
-export class DeckComponent implements OnInit {
   htmlContent: any;
   bsEditorInstance: EditorInstance;
   name = "Angular 6";
@@ -26,7 +23,7 @@ export class DeckComponent implements OnInit {
   no: any = [];
   editorobject: any = [];
   editordata: any;
-  markdownText: any;
+  markdownText: string;
   showEditor = true;
   public Editor = ClassicEditor
   public descriptiondata : any ;
@@ -47,8 +44,7 @@ export class DeckComponent implements OnInit {
   public mycontent: any = [];
   public filterQuery = "";
   public addcards = false;
-  public UpdatCardshow = false;
-
+  public Updatecards = false;
   editorList = [
     { id: 1, name: "WYSIWYG" },
     { id: 2, name: "Markdown" },
@@ -340,11 +336,10 @@ export class DeckComponent implements OnInit {
   addcard() {
     this.addcards = true;
   }
-  UpdatecardModal(){
-    this.UpdatCardshow = true;
+
+  Updatecardmodal(){
+    this.Updatecards = true;
   }
-
-
 
 
   // ADD Cards Details
@@ -413,7 +408,6 @@ export class DeckComponent implements OnInit {
   addanswer() {
     this.ap = !this.ap;
   }
-
   datavalues(values, i,val) {
     var data = values.rows;
      var dataans = values.rows;
@@ -475,35 +469,37 @@ export class DeckComponent implements OnInit {
     this.no = i;
      alert(this.markdownText)
   }
+
+
   WYSIWYEditor(id,data){
     console.log("item",id)   
     var ws1 = this.htmlContent;
     var ws2 = this.htmlContent;
 
-
-    console.log("item",data)    
-
-    var z = this.form.value.description;
-    var p = this.form.value.description;
-
-    if (data[id].side1 == null || data[id].side2 != null) {
-      this.editordata[id].side2 = ws2;
-    }
-    else if (data[id].side2 == null || data[id].side1 != null) {
+    if(data == "Q")
+    {
       this.editordata[id].side1 = ws1;
     }
 
-  
-    var datavalues = {};
-    datavalues['rows'] = this.editordata;
+    if(data == "A")
+    {
+      this.editordata[id].side2 = ws2;
+    }
 
-    this.addForm.patchValue(datavalues);
+    console.log("item",data)    
+
+
+    
+  
+    var datavaluesEditor = {};
+    datavaluesEditor['rows'] = this.editordata;
+
+    this.addForm.patchValue(datavaluesEditor);
   }
   sendEditorsdata(data, returndata) {
-  console.log("item",returndata)    
+    console.log("item",returndata)    
 
     var z = this.markdownText;
-
     var p = this.markdownText;
     if(returndata == "Q")
     {
@@ -525,25 +521,28 @@ export class DeckComponent implements OnInit {
 
   sendCKEditorsdata(data,id){
 
-    // console.log("item",data)    
+    console.log("item",data)    
 
     var z = this.form.value.description;
     var p = this.form.value.description;
-
-    if (data[id].side1 == null || data[id].side2 != null) {
-      this.editordata[id].side2 = p;
+    if(data == "Q")
+    {
+      this.editordata[id].side1 = p;
     }
-    else if (data[id].side2 == null || data[id].side1 != null) {
-      this.editordata[id].side1 = z;
+
+    if(data == "A")
+    {
+      this.editordata[id].side2 = z;
     }
 
   
-    var datavalues = {};
-    datavalues['rows'] = this.editordata;
+    var wzdatavalues = {};
+    wzdatavalues['rows'] = this.editordata;
 
-    this.addForm.patchValue(datavalues);
+    this.addForm.patchValue(wzdatavalues);
   }
- 
+
+
   removeCardDetails(data) {
     // console.log(data);
     var dataget = {

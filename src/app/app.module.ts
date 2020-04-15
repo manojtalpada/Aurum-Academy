@@ -40,9 +40,12 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { DeckFilterPipe } from './view/deck/datafilterpipe';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { TreeTableModule } from 'primeng/components/treetable/treetable';
 
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { AngularMarkdownEditorModule } from 'src/lib/angular-markdown-editor';
+import { RoleGuardService } from './guards/roleGuardService';
+import { DeckfileComponent } from './view/deckfile/deckfile.component';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -86,7 +89,8 @@ export function provideConfig() {
     FolderComponent,
     LessonComponent,
     PaypalDemoComponent,
-    DeckFilterPipe
+    DeckFilterPipe,
+    DeckfileComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,7 @@ export function provideConfig() {
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     CKEditorModule,
-
+    TreeTableModule,
     MarkdownModule.forRoot({
       provide: MarkedOptions,
       useFactory: (): MarkedOptions => {
@@ -133,6 +137,7 @@ export function provideConfig() {
     MasterService,
     AuthenticationService,
     AuthGuard,
+    RoleGuardService,
     AuthService,
     AunumService,
     UserService,

@@ -3,6 +3,8 @@ import { SocialUser, GoogleLoginProvider, FacebookLoginProvider, AuthService } f
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MasterService, AuthenticationService } from 'src/app/services';
+import { IOption } from 'ng-select';
+import { AunumService } from 'src/app/services/aunumServices';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { MasterService, AuthenticationService } from 'src/app/services';
 export class LoginComponent implements OnInit {
 
   response;  
- 
+ userType:any={}
   user: any = {};
   model: any = {};
   returnUrl: string;
@@ -20,6 +22,12 @@ export class LoginComponent implements OnInit {
   sData:any = {};
   // loading = false;
   // private loggedIn: boolean;
+  public type: Array<IOption> = [
+      
+    { value: 't', label: 'Teacher' },
+    { value: 's', label: 'Student' }
+
+];
 
   username:''
   fname: ''
@@ -28,12 +36,23 @@ export class LoginComponent implements OnInit {
   lname: ''
 
   public data;
-  constructor(private SocialloginService: UserService,private authService: AuthService,private userService: UserService, private _router: Router, private _route: ActivatedRoute, private _masterservices: MasterService, public authenticationService: AuthenticationService) { }
+  constructor(private SocialloginService: UserService,private aunumservices : AunumService,private authService: AuthService,private userService: UserService, private _router: Router, private _route: ActivatedRoute, private _masterservices: MasterService, public authenticationService: AuthenticationService) { }
 
   // ngOnInit() {
   //   // this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
   //   // this._router.navigate([this.returnUrl]);
   // }
+  ngOnInit() {
+    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+  this._router.navigate([this.returnUrl]);
+  this.authenticationService.isLogout();
+  this.authService.authState.subscribe((usersocial) => {
+    this.usersocial = usersocial;
+    // this.loggedIn = (usersocial != null);
+ 
+    // console.log(usersocial);
+  });
+}
 
   logindd() {
     var userLogin = {
@@ -48,26 +67,78 @@ export class LoginComponent implements OnInit {
           if (data.status == "0") {
             alert("login Faild");
           } else {
+
             alert("login successfully")
-            this._router.navigate(['dashboard']);  
+             // console.log(data.data.result)
+            this.userType = data.data.result;
+
+            if(this.userType.user_type !="" && this.userType.user_type !=null){
+              // this._router.navigate(['dashboard']);  
+              this._router.navigate([this.returnUrl]);
+
+            }else{
+
+              alert('select Type first')
+              document.getElementById("openModalButton").click();
+               
+
+            }
+            
           }        
         },
         error => {
           alert("login Faild")
         });
   }
+  addUserType(){
+    var data = {
+      user_id:this.userType.id,
+
+      my_id:this.userType.id,
+      first_name:this.userType.first_name,
+      last_name:this.userType.last_name,
+      user_name:this.userType.user_name,
+      birthdate:this.userType.birthdate,
+      email:this.userType.email,
+      password:this.userType.password,
+      google_id:this.userType.google_id,
+      facebook_id:this.userType.facebook_id,
+      current_package_id:"",
+      current_package_name:"",
+      current_package_type:"",
+      current_package_pay_by_user_id:"",
+      master_id:"",
+      user_type:this.userType.user_type,
+      url_slug:"",
+      action:"update"
+    }
+    console.log(data)
+    this.aunumservices.registerUpdate(data)
+    .subscribe(
+      data => { 
+        var custdetails = data; 
+        // console.log(data.data.result)
+       if(this.userType.google_id !=""){
+         this.socialLoginGoogle(this.userType.google_id)
+       }
+       if(this.userType.facebook_id !=""){
+         this.socialLogin(this.userType.facebook_id)
+       }
+        // this._router.navigate(['login']);
+        this.logindd();
 
 
-
-
-  ngOnInit() {
-    this.authService.authState.subscribe((usersocial) => {
-      this.usersocial = usersocial;
-      // this.loggedIn = (usersocial != null);
-   
-      // console.log(usersocial);
-    });
+       
+      },
+      error => {
+        console.log(error);
+      });
+    console.log(data)
   }
+
+
+
+ 
 
   signInWithFB(): void {
     // this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => console.log(x));    
@@ -100,6 +171,7 @@ this.sData = {
     last_name: usersocial.lastName,
     user_name:"",
     email:  usersocial.email,
+    birthdat:"",
     password: "",
     google_id: "",
     facebook_id: usersocial.id,
@@ -120,7 +192,7 @@ this.sData = {
     // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));  
     // console.log(localStorage.setItem('socialusers', JSON.stringify(this.usersocial)));  
    this.socialLogin(usersocial.id)
-    this._router.navigate(['dashboard']); 
+    // this._router.navigate(['dashboard']); 
     
   })  
 }
@@ -133,11 +205,25 @@ socialLogin(userid){
    this.userService.social_login(userSet)
   .subscribe((res: any) => {  
     // debugger;  
+    console.log(res.data.result)
+
+    this.userType = res.data.result;
+
+    if(this.userType.user_type !=null && this.userType.user_type !=""){
+      this._router.navigate(['dashboard']);  
+
+    }else{
+
+      alert('select Type first')
+      document.getElementById("openModalButton").click();
+       
+
+    }
     
      // this.response = res.userDetail;  
     // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));  
     // console.log(localStorage.setItem('socialusers', JSON.stringify(this.usersocial)));  
-     this._router.navigate(['dashboard']); 
+    //  this._router.navigate(['dashboard']); 
     
   }) 
 }
@@ -166,6 +252,7 @@ socialLogin(userid){
       last_name: userInfo.lastName,
       user_name:"",
       email:  userInfo.email,
+      birthdate:"",
       password: "",
       google_id: userInfo.id,
       facebook_id: "",
@@ -181,30 +268,49 @@ socialLogin(userid){
     this.userService.register_social(this.sData).subscribe((res: any) => {  
       // debugger;  
       this.usersocial=res.data[0];  
+      console.log(res)
       // console.log(this.usersocial)
       // this.response = res.userDetail;  
       // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));  
       // console.log(localStorage.setItem('socialusers', JSON.stringify(this.usersocial)));  
      this.socialLoginGoogle(userInfo.id)
-      this._router.navigate(['dashboard']); 
+      
       
     })  
 
   }
 
   socialLoginGoogle(userid){
+   
     var userSet = {
       action:"social_login",
       google_id:userid
     }
+    console.log(userSet)
      this.userService.social_login(userSet)
     .subscribe((res: any) => {  
       // debugger;  
       
+      // this._router.navigate(['dashboard']);  
+
+      this.userType = res.data.result;
+      console.log(res.data)
+
+      if(this.userType.user_type !=null && this.userType.user_type !="" && this.userType.user_type!=undefined){
+        this._router.navigate(['dashboard']);  
+
+      }else{
+
+        alert('select Type first')
+        document.getElementById("openModalButton").click();
+         
+
+      }
+
        // this.response = res.userDetail;  
       // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));  
       // console.log(localStorage.setItem('socialusers', JSON.stringify(this.usersocial)));  
-       this._router.navigate(['dashboard']); 
+        
       
     }) 
 

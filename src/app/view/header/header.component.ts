@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AunumService } from 'src/app/services/aunumServices';
 import { Router } from '@angular/router';
 import { parseDate } from 'ngx-bootstrap';
+import { decode } from 'punycode';
 
 @Component({
   selector: 'app-header',
@@ -12,19 +13,25 @@ export class HeaderComponent implements OnInit {
   usernamee = sessionStorage.getItem('currentUser');
 
   usernamedata = sessionStorage.getItem('first_name');
+  userType;
 
   username = JSON.parse(this.usernamedata);
   userid = sessionStorage.getItem("userid");
 
   
+  
 public editModalChange;
   public editModal;
   model: any = {};
   user : any = {};
-
  
   
-  constructor(private aunumservices: AunumService,public router: Router) { }
+  constructor(private aunumservices: AunumService,public router: Router) {
+    // console.log(this.userType)
+    this.userType =JSON.parse(sessionStorage.getItem('user_type'));
+
+   
+   }
 
   ngOnInit() {
   }

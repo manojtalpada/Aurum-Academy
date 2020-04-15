@@ -17,30 +17,33 @@ import { FolderComponent } from './view/folder/folder.component';
 import { LessonComponent } from './view/lesson/lesson.component';
 import { AuthGuard } from './guards';
 import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
+import { RoleGuardService } from './guards/roleGuardService';
+import { DeckfileComponent } from './view/deckfile/deckfile.component';
+var userType = sessionStorage.getItem('user_type');
 
 
 const routes: Routes = [
 
-  {path:"header",component:HeaderComponent,canActivate: [AuthGuard]},
-  {path:"footer",component : FooterComponent,canActivate: [AuthGuard]},
+  {path:"header",component:HeaderComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path:"footer",component : FooterComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"login",component: LoginComponent},
   {path:"register",component: RegisterComponent},
-  {path:"dashboard",component: DashboardComponent,canActivate: [AuthGuard]},
-  {path:"view-user",component: ViewUserComponent,canActivate: [AuthGuard]},
+  {path:"dashboard",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path:"view-user",component: ViewUserComponent,canActivate: [RoleGuardService],data:{expectedRole:['s']}},
   {path:"logout",component:LogoutComponent},
   {path : "forgote",component:ForgoteComponent},
   {path : "changes",component : ChangesComponent},
   {path : "course",component : CourseComponent},
-  {path : "deck",component:DeckComponent},
+  {path : "deckfile",component:DeckfileComponent},
   {path:"cards",component:CardsComponent},
   {path:"attachment",component:AttachmentComponent},
   {path : "folder",component:FolderComponent},
-  {path : "changes",component : ChangesComponent,canActivate: [AuthGuard]},
-  {path : "course",component : CourseComponent,canActivate: [AuthGuard]},
-  {path : "deck",component:DeckComponent,canActivate: [AuthGuard]},
-  {path:"cards",component:CardsComponent,canActivate: [AuthGuard]},
-  {path:"attachment",component:AttachmentComponent,canActivate: [AuthGuard]},
-  {path:"lesson",component:LessonComponent,canActivate: [AuthGuard]},
+  {path : "changes",component : ChangesComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path : "course",component : CourseComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path : "deckfile",component:DeckfileComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path:"cards",component:CardsComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path:"attachment",component:AttachmentComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  {path:"lesson",component:LessonComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
   {path : "paypal-demo",component:PaypalDemoComponent},
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
 ];

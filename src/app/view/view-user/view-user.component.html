@@ -7,7 +7,7 @@
             <div class="col-sm-12">
                 <div class="heading">
                     <h3>User Details</h3>
-                    <!-- <a (click)="demopop();" class="btn btn-primary float-right">+ Create New User</a> -->
+                    <a (click)="userModal.show();" class="btn btn-primary float-right">+ Create New Account</a>
 
                 </div>
                 <div class="card">
@@ -85,8 +85,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="form-group">
-
+                            <div class="form-group"> 
 
                                 <input class="form-control" type="text" [(ngModel)]="model.first_name" name="first_name" #first_name="ngModel" placeholder="First Name" />
                                 <label for="name"></label>
@@ -94,46 +93,15 @@
                                 <label for="name"></label>
                                 <input class="form-control" type="text" [(ngModel)]="model.user_name" name="user_name" #user_name="ngModel" placeholder="username" />
                                 <label for="name"></label>
-                                <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" required>
-                                <!-- <small *ngIf="UpdateForm.submitted && email.invalid" class="invalid-feedback">
-                                    <small *ngIf="email.errors.required">Email is required</small>
-                                <small *ngIf="email.errors.pattern">Email is not valid</small>
-                                </small> -->
-                                <label for="name"></label>
-                                <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" id="password" #password="ngModel" minlength="8">
-                                <!-- <small *ngIf="UpdateForm.submitted && password.invalid" class="invalid-feedback">
-                                    <small *ngIf="password.errors.required">Password is required</small>
-                                <small *ngIf="password.errors.minlength">Minimum 8 character allow</small>
-                                </small> -->
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="google_id" name="google_id" [(ngModel)]="model.google_id" #google_id="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="facebook_id" name="facebook_id" [(ngModel)]="model.facebook_id" #facebook_id="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="current_package_id" name="current_package_id" [(ngModel)]="model.current_package_id" #current_package_id="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="current_package_name" name="current_package_name" [(ngModel)]="model.current_package_name" #current_package_name="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="current_package_type" name="current_package_type" [(ngModel)]="model.current_package_type" #current_package_type="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="current_package_pay_by_user_id" name="current_package_pay_by_user_id" [(ngModel)]="model.current_package_pay_by_user_id" #current_package_pay_by_user_id="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="master_id" name="master_id" [(ngModel)]="model.master_id" #master_id="ngModel">
-                                <div class="form-group">
-                                    <!-- <label for="select1">Select Country</label> -->
-                                    <fieldset class="form-group">
-                                        <ng-select name="user_type" [(ngModel)]="model.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
-                                    </fieldset>
-                                </div>
-                                <!-- <label for="name"></label> -->
-                                <!-- <input type="text" class="form-control" placeholder="user_type" name="user_type" [(ngModel)]="model.user_type" #user_type="ngModel"> -->
                                 <label for="name"></label>
                                 <input type="date" class="form-control" placeholder="birthday" name="birthdate" [(ngModel)]="model.birthdate" #birthdate="ngModel">
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="url_slug" name="url_slug" [(ngModel)]="model.url_slug" #url_slug="ngModel">
-                                <label for="name"></label>
-                                <!-- <input type="text" class="form-control" placeholder="action" name="action" [(ngModel)]="model.action" #action="ngModel"> -->
+                              
+                                <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" required>
 
+                                <label for="name"></label>
+                                <input type="text" class="form-control" placeholder="Slug ID" name="url_slug" [(ngModel)]="model.url_slug" id="url_slug" #url_slug="ngModel" minlength="8">
+                                
+                               
                             </div>
                         </div>
                     </div>
@@ -147,3 +115,51 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- New Account Modal -->
+<div bsModal #userModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header appoint-head-color">
+                <h4 class="modal-title appoint-color"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create User Account</h4>
+                <button type="button" class="close" (click)="userModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group"> 
+
+                                <input class="form-control" type="text" [(ngModel)]="model.first_name" name="first_name" #first_name="ngModel" placeholder="First Name" />
+                                <label for="name"></label>
+                                <input class="form-control" type="text" [(ngModel)]="model.last_name" name="last_name" #last_name="ngModel" placeholder="Last Name" />
+                                <label for="name"></label>
+                                <input class="form-control" type="text" [(ngModel)]="model.user_name" name="user_name" #user_name="ngModel" placeholder="username" />
+                                <label for="name"></label>
+                                <label for="name"></label>
+                                <input type="date" class="form-control" placeholder="birthday" name="birthdate" [(ngModel)]="model.birthdate" #birthdate="ngModel">
+                              
+                                <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" required>
+
+                                <label for="name"></label>
+                                <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" id="password" #password="ngModel" minlength="8">
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)=" userModal.hide()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addAccount(); userModal.hide()">Save
+             </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Account Modal -->

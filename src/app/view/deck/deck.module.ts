@@ -7,6 +7,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { DeckFilterPipe } from './datafilterpipe';
 import { DeckComponent } from './deck.component';
 import { ButtonsModule, AlertModule } from 'ngx-bootstrap';
+import { SelectModule } from 'ng-select';
 
 
 @NgModule({
@@ -15,10 +16,13 @@ import { ButtonsModule, AlertModule } from 'ngx-bootstrap';
     DataTableModule, 
     ModalModule.forRoot(), 
     FormsModule,   
+    SelectModule, 
     ReactiveFormsModule,  
     ButtonsModule.forRoot(),
     AlertModule.forRoot(),
-    ModalModule.forRoot()
+    AlertModule.forRoot(),
+
+    
   ], 
   declarations: [DeckComponent,DeckFilterPipe]
 })
