@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialUser, GoogleLoginProvider, FacebookLoginProvider, AuthService } from 'angularx-social-login';
 import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MasterService, AuthenticationService } from 'src/app/services';
 import { IOption } from 'ng-select';
 import { AunumService } from 'src/app/services/aunumServices';
@@ -34,8 +34,9 @@ export class LoginComponent implements OnInit {
   email: ''
   password: ''
   lname: ''
-
+  params: Params;
   public data;
+  slug_url:any={}
   constructor(private SocialloginService: UserService,private aunumservices : AunumService,private authService: AuthService,private userService: UserService, private _router: Router, private _route: ActivatedRoute, private _masterservices: MasterService, public authenticationService: AuthenticationService) { }
 
   // ngOnInit() {
@@ -43,7 +44,13 @@ export class LoginComponent implements OnInit {
   //   // this._router.navigate([this.returnUrl]);
   // }
   ngOnInit() {
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    this._route.paramMap.subscribe(params => {
+      console.log(params.get("slug_url"))
+      this.slug_url = params.get("slug_url")
+
+  })
+    
+     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
   this._router.navigate([this.returnUrl]);
   this.authenticationService.isLogout();
   this.authService.authState.subscribe((usersocial) => {
@@ -61,7 +68,8 @@ export class LoginComponent implements OnInit {
       action:"login"
 
     }
-    this.userService.Login(userLogin)
+    if(this.slug_url == null || this.slug_url == "" || this.slug_url == undefined){
+      this.userService.Login(userLogin)
       .subscribe(
         data => {
           if (data.status == "0") {
@@ -71,6 +79,7 @@ export class LoginComponent implements OnInit {
             alert("login successfully")
              // console.log(data.data.result)
             this.userType = data.data.result;
+            // console.log(this.userType)
 
             if(this.userType.user_type !="" && this.userType.user_type !=null){
               // this._router.navigate(['dashboard']);  
@@ -78,7 +87,7 @@ export class LoginComponent implements OnInit {
 
             }else{
 
-              alert('select Type first')
+              alert()
               document.getElementById("openModalButton").click();
                
 
@@ -89,6 +98,36 @@ export class LoginComponent implements OnInit {
         error => {
           alert("login Faild")
         });
+    }else{
+      var subuserLogin = {
+        email:this.user.email,
+      password:this.user.password,
+      url_slug:this.slug_url,
+      action:"sub_login"
+      }
+      console.log(subuserLogin)
+
+      this.userService.subLogin(subuserLogin)
+      .subscribe(
+        data => {
+          if (data.status == "0") {
+            alert("login Faild");
+          } else {
+
+            alert("login successfully")
+             // console.log(data.data.result)
+            // this.userType = data.data.result;
+              this._router.navigate(['dashboard',this.slug_url]);  
+              // this._router.navigate(['course']);
+
+            
+          }        
+        },
+        error => {
+          alert("login Faild")
+        });
+    }
+    
   }
   addUserType(){
     var data = {
@@ -109,7 +148,7 @@ export class LoginComponent implements OnInit {
       current_package_pay_by_user_id:"",
       master_id:"",
       user_type:this.userType.user_type,
-      url_slug:"",
+      url_slug:this.userType.url_slug,
       action:"update"
     }
     console.log(data)
@@ -274,7 +313,6 @@ socialLogin(userid){
       // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));  
       // console.log(localStorage.setItem('socialusers', JSON.stringify(this.usersocial)));  
      this.socialLoginGoogle(userInfo.id)
-      
       
     })  
 

@@ -112,6 +112,25 @@ export class UserService {
             return data;
         })
       }
+      //subaccount Login
+      subLogin(data){
+        return this.http.post(`${this.baseUrl}/sub_login`,JSON.stringify(data),this.options)
+        .map(res =>{
+             var data;
+            data = res
+            if (data && data.data.token) {
+                // console.log(user);
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                sessionStorage.setItem('currentUser', JSON.stringify(data.data.result));
+                sessionStorage.setItem('token', JSON.stringify(data.data.token));
+                sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
+                sessionStorage.setItem('userid',JSON.stringify(data.data.result.id))
+                sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type)) 
+
+             }
+             return data;
+        })
+      }
     register_social(data){
         return this.http.post<any>(`${this.baseUrl}/user`,JSON.stringify(data),this.options) 
         //   return this.http.post<any>(appConfig.apiUrl+'/user', data)
