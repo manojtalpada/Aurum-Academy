@@ -19,21 +19,25 @@ import { AuthGuard } from './guards';
 import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
 import { RoleGuardService } from './guards/roleGuardService';
 var userType = sessionStorage.getItem('user_type');
-
+// console.log(userType)
 
 const routes: Routes = [
 
   {path:"header",component:HeaderComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"footer",component : FooterComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"login",component: LoginComponent},
+  // {path:"login/:slug_url",component: LoginComponent},
+  
+  // {path:"dashboard/:slug_url",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+
   {path:"register",component: RegisterComponent},
   {path:"dashboard",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"view-user",component: ViewUserComponent,canActivate: [RoleGuardService],data:{expectedRole:['s']}},
   {path:"logout",component:LogoutComponent},
-  {path : "forgote",component:ForgoteComponent},
-  {path : "changes",component : ChangesComponent},
-  {path : "course",component : CourseComponent},
-  {path : "deck",component:DeckComponent},
+  // {path : "forgote",component:ForgoteComponent},
+  // {path : "changes",component : ChangesComponent},
+  // {path : "course",component : CourseComponent},
+  // {path : "deck",component:DeckComponent},
   {path:"cards",component:CardsComponent},
   {path:"attachment",component:AttachmentComponent},
   {path : "folder",component:FolderComponent},
@@ -44,7 +48,9 @@ const routes: Routes = [
   {path:"attachment",component:AttachmentComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"lesson",component:LessonComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
   {path : "paypal-demo",component:PaypalDemoComponent},
+  // {path:"",redirectTo:"dashboard",pathMatch:"full"},
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
+
 ];
 
 @NgModule({

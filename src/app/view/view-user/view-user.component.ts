@@ -88,7 +88,7 @@ export class ViewUserComponent implements OnInit {
         current_package_type :"",
         current_package_pay_by_user_id :"",
         master_id:JSON.parse(sessionStorage.getItem('userid')),
-        user_type : "",
+        user_type : "s",
         url_slug :this.model.url_slug,
         birthdate :this.model.birthdate,
         // created_at : this.model.created_at,
@@ -145,7 +145,9 @@ export class ViewUserComponent implements OnInit {
       this.model.master_id = data[0].master_id;
       this.model.user_type = data[0].user_type;
       this.model.url_slug = data[0].url_slug;
-      this.model.birthdate = data[0].birthdate;
+      // this.model.birthdate = data[0].birthdate;
+      this.model.birthdate =  new Date(data[0].birthdate).toISOString().split('T')[0];;   
+
       this.model.created_at = data[0].created_at;
       this.model.upadteddate = data[0].updated_at;
    
@@ -204,6 +206,8 @@ export class ViewUserComponent implements OnInit {
             }else{
 
               alert('User Created Successfully')
+              this.getAllUser();
+
             }
             // this._router.navigate(['login']);
            
