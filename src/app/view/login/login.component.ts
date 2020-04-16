@@ -19,6 +19,7 @@ import { AunumService } from "src/app/services/aunumServices";
 export class LoginComponent implements OnInit {
   response;
   userType: any = {};
+  subuserType:any={}
   user: any = {};
   model: any = {};
   returnUrl: string;
@@ -139,14 +140,50 @@ export class LoginComponent implements OnInit {
       console.log(subuserLogin);
 
       this.userService.subLogin(subuserLogin).subscribe(
-        (data) => {
-          if (data.status == "0") {
+        (res) => {
+          if (res.status == "0") {
             alert("login Faild");
           } else {
-            alert("login successfully");
-            // console.log(data.data.result)
-            // this.userType = data.data.result;
-            this._router.navigate(["dashboard", this.slug_url]);
+         
+            var val = {
+              birthdate: res.data.result.birthdate,
+              created_at: res.data.result.created_at,
+              current_package_id: res.data.result.current_package_id,
+              current_package_name: res.data.result.current_package_name,
+              current_package_pay_by_user_id:res.data.result.current_package_pay_by_user_id,
+              current_package_type: res.data.result.current_package_type,
+              deleted_status: res.data.result.deleted_status,
+              email: res.data.result.email,
+              facebook_id: res.data.result.facebook_id,
+              first_name: res.data.result.first_name,
+              google_id: res.data.result.google_id,
+              id: res.data.result.id,
+              last_name: res.data.result.last_name,
+              master_id: res.data.result.master_id,
+              password: res.data.result.password,
+              permission_to_create_course:res.data.result.permission_to_create_course,
+              permission_to_join_classes: res.data.result.permission_to_join_classes,
+              status: res.data.result.status,
+              updated_at: res.data.result.updated_at,
+              url_slug: res.data.result.url_slug,
+              user_name: res.data.result.user_name,
+              user_type:this.uType,
+            };
+                  // console.log(data.data.result)
+                  this.subuserType = val;
+                  // console.log(this.userType)
+      
+                  if(this.subuserType.user_type !="" && this.subuserType.user_type !=null){
+                  // this._router.navigate(['dashboard']);
+                  this._router.navigate(["dashboard", this.slug_url]);
+      
+                  }else{
+                    alert("In first Login");
+                     document.getElementById("openModalsubUserButton").click();
+      
+                  }
+             // this.userType = data.data.result;
+           
             // this._router.navigate(['course']);
           }
         },
@@ -156,6 +193,87 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+
+  subbLogin(){
+    var subuserLogin = {
+        email: this.user.email,
+        password: this.user.password,
+        url_slug: this.slug_url,
+        action: "sub_login",
+      };
+      console.log(subuserLogin);
+
+      this.userService.subLogin(subuserLogin).subscribe(
+        (res) => {
+          if (res.status == "0") {
+            alert("login Faild");
+          } else {
+            alert("login successfully");
+            
+                  // console.log(data.data.result)
+                  
+                  // console.log(this.userType)
+      
+                 
+                  // this._router.navigate(['dashboard']);
+                  this._router.navigate(["dashboard", this.slug_url]);
+      
+                 
+             // this.userType = data.data.result;
+           
+            // this._router.navigate(['course']);
+          }
+        },
+        (error) => {
+          alert("login Faild");
+        }
+      );
+
+  }
+
+  addsubUserType(){
+    
+      var data = {
+       user_id: this.subuserType.id,
+ 
+       my_id: this.subuserType.id,
+       first_name: this.subuserType.first_name,
+       last_name: this.subuserType.last_name,
+       user_name: this.subuserType.user_name,
+       birthdate: this.subuserType.birthdate,
+       email: this.subuserType.email,
+       password: this.subuserType.password,
+       google_id: this.subuserType.google_id,
+       facebook_id: this.subuserType.facebook_id,
+       current_package_id: "",
+       current_package_name: "",
+       current_package_type: "",
+       current_package_pay_by_user_id: "",
+       master_id: this.subuserType.master_id,
+       user_type:"",
+       url_slug: this.subuserType.url_slug,
+       action: "update",
+     };  
+     this.aunumservices.registerUpdate(data)
+     .subscribe(
+       data => {
+         var custdetails = data;
+         // console.log(data.data.result)
+     
+      
+         // this._router.navigate(['login']);
+         sessionStorage.setItem("user_type",JSON.stringify(this.subuserType.user_type));
+     this.subbLogin();
+ 
+       },
+       error => {
+         console.log(error);
+       });
+     console.log(data);
+   }
+
+  
+
   logindd1() {
     var userLogin = {
       email: this.user.email,
