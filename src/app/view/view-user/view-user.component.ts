@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AunumService } from 'src/app/services/aunumServices';
 import { ActivatedRoute } from '@angular/router';
 import { IOption } from 'ng-select';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-view-user',
@@ -18,20 +19,26 @@ export class ViewUserComponent implements OnInit {
   country = {};
   
   userid = sessionStorage.getItem('userid');
-  
+  contact: any;
+  userdata: any = {};
+  contacts: any[] = [];
   public type: Array<IOption> = [
       
     { value: 't', label: 'teacher' },
     { value: 's', label: 'student' }
 
 ];
-  constructor(private aunumservices: AunumService,private _route: ActivatedRoute) {    
+  constructor(private aunumservices: AunumService,private _route: ActivatedRoute,private contactService: ContactService) {    
     this.getAllUser();
 
    }
 
   ngOnInit() {
-  
+    this.contactService.getContacts().subscribe((data : any[])=>{
+      console.log(data);
+      this.contacts = data;
+      console.log(this.contacts)
+      })
   }
 
 
@@ -88,7 +95,7 @@ export class ViewUserComponent implements OnInit {
         current_package_type :"",
         current_package_pay_by_user_id :"",
         master_id:JSON.parse(sessionStorage.getItem('userid')),
-        user_type : "s",
+        // user_type : "s",
         url_slug :this.model.url_slug,
         birthdate :this.model.birthdate,
         // created_at : this.model.created_at,

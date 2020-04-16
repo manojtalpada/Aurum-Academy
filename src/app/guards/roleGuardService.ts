@@ -13,7 +13,7 @@ var slug_url={};
     // this will be passed from the route config
     const token = sessionStorage.getItem('token');
     if (!token){
-       this.router.navigate(['/login',''])
+       this.router.navigate(['login',''])
       return false;      
     }
     const tokenPayload = decode(token);

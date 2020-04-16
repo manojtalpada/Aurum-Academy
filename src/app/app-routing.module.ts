@@ -19,6 +19,7 @@ import { AuthGuard } from './guards';
 import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
 import { RoleGuardService } from './guards/roleGuardService';
 import { DeckfileComponent } from './view/deckfile/deckfile.component';
+import { ContactDetailComponent } from './view/contact-detail/contact-detail.component';
 var userType = sessionStorage.getItem('user_type');
 // console.log(userType)
 
@@ -27,13 +28,13 @@ const routes: Routes = [
   {path:"header",component:HeaderComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"footer",component : FooterComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"login",component: LoginComponent},
-  // {path:"login/:slug_url",component: LoginComponent},
+  {path:"login/:slug_url",component: LoginComponent},
   
-  // {path:"dashboard/:slug_url",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
-
+  // {path:":username/dashboard",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
+  
   {path:"register",component: RegisterComponent},
   {path:"dashboard",component: DashboardComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
-  {path:"view-user",component: ViewUserComponent,canActivate: [RoleGuardService],data:{expectedRole:['s']}},
+  {path:"view-user/:username",component: ViewUserComponent,canActivate: [RoleGuardService],data:{expectedRole:['s']}},
   {path:"logout",component:LogoutComponent},
   {path : "forgote",component:ForgoteComponent},
   {path : "changes",component : ChangesComponent},
@@ -48,8 +49,17 @@ const routes: Routes = [
   {path:"cards",component:CardsComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"attachment",component:AttachmentComponent,canActivate: [RoleGuardService],data:{expectedRole:['t','s']}},
   {path:"lesson",component:LessonComponent,canActivate:[RoleGuardService],data:{expectedRole:['t','s']}},
-  {path : "paypal-demo",component:PaypalDemoComponent},
-  // {path:"",redirectTo:"dashboard",pathMatch:"full"},
+  {path:":url_slug/lesson",component:LessonComponent},
+  {path : ":paypal-demo",component:PaypalDemoComponent},
+  {path : ":url_slug/paypal-demo",component:PaypalDemoComponent},
+  {path:':url_slug/dashboard',component: DashboardComponent},
+  {path : ":url_slug/deckfile",component:DeckfileComponent},
+  {path:":url_slug/cards",component:CardsComponent},
+  {path:"view-user/:username/contact",component: ViewUserComponent},
+  {path : ":url_slug/folder",component:FolderComponent},
+  {path : ":url_slug/course",component : CourseComponent},
+  // {path:':username/contact',component: ContactDetailComponent},
+  // / {path:"",redirectTo:"dashboard/:slug_url",pathMatch:"full"},
   {path:"",redirectTo:"dashboard",pathMatch:"full"}
 
 ];

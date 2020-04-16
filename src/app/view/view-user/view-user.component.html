@@ -45,7 +45,7 @@
                                           </button>
                                     </td> -->
                                     <td>
-                                        <a [routerLink]="[item.username+'/contact']">Go to details</a>
+                                        <a [routerLink]="[item.user_name+'/contact']">Go to details</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -85,7 +85,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="form-group"> 
+                            <div class="form-group">
 
                                 <input class="form-control" type="text" [(ngModel)]="model.first_name" name="first_name" #first_name="ngModel" placeholder="First Name" />
                                 <label for="name"></label>
@@ -95,13 +95,13 @@
                                 <label for="name"></label>
                                 <label for="name"></label>
                                 <input type="date" class="form-control" placeholder="birthday" name="birthdate" [(ngModel)]="model.birthdate" #birthdate="ngModel">
-                              
+
                                 <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" required>
 
                                 <label for="name"></label>
                                 <input type="text" class="form-control" placeholder="Slug ID" name="url_slug" [(ngModel)]="model.url_slug" id="url_slug" #url_slug="ngModel" minlength="8">
-                                
-                               
+
+
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="form-group"> 
+                            <div class="form-group">
 
                                 <input class="form-control" type="text" [(ngModel)]="model.first_name" name="first_name" #first_name="ngModel" placeholder="First Name" />
                                 <label for="name"></label>
@@ -142,13 +142,13 @@
                                 <label for="name"></label>
                                 <label for="name"></label>
                                 <input type="date" class="form-control" placeholder="birthday" name="birthdate" [(ngModel)]="model.birthdate" #birthdate="ngModel">
-                              
+
                                 <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="model.email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email="ngModel" required>
 
                                 <label for="name"></label>
                                 <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" id="password" #password="ngModel" minlength="8">
-                                
-                               
+
+
                             </div>
                         </div>
                     </div>

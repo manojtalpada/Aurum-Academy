@@ -46,6 +46,7 @@ import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { AngularMarkdownEditorModule } from 'src/lib/angular-markdown-editor';
 import { RoleGuardService } from './guards/roleGuardService';
 import { DeckfileComponent } from './view/deckfile/deckfile.component';
+import { ContactDetailComponent } from './view/contact-detail/contact-detail.component';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -90,7 +91,8 @@ export function provideConfig() {
     LessonComponent,
     PaypalDemoComponent,
     DeckFilterPipe,
-    DeckfileComponent
+    DeckfileComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,

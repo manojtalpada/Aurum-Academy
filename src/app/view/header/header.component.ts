@@ -11,13 +11,13 @@ import { decode } from 'punycode';
 })
 export class HeaderComponent implements OnInit {
   usernamee = sessionStorage.getItem('currentUser');
-
+  
   usernamedata = sessionStorage.getItem('first_name');
   userType;
-
+  url_slug = sessionStorage.getItem('url_slug');
   username = JSON.parse(this.usernamedata);
   userid = sessionStorage.getItem("userid");
-
+  url_slugdata = JSON.parse(this.url_slug);
   
   
 public editModalChange;
@@ -27,11 +27,12 @@ public editModalChange;
  
   
   constructor(private aunumservices: AunumService,public router: Router) {
-    // console.log(this.userType)
+    console.log(this.url_slugdata)
+    
     this.userType =JSON.parse(sessionStorage.getItem('user_type'));
 
-   
-   }
+   ;
+  }
 
   ngOnInit() {
   }
@@ -104,7 +105,7 @@ updateProfile(){
 
   
   editcliendataResponse(data) {
-    console.log(data);
+    console.log("slugurl",data);
     this.model.first_name = data[0].first_name;
     this.model.last_name = data[0].last_name;
     this.model.user_name = data[0].user_name;

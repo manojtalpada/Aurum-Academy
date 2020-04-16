@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MasterService, AuthenticationService } from 'src/app/services';
 import { IOption } from 'ng-select';
 import { AunumService } from 'src/app/services/aunumServices';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   usersocial: SocialUser;
   sData:any = {};
-  // loading = false;
-  // private loggedIn: boolean;
+  loading = false;
+  private loggedIn: boolean;
   public type: Array<IOption> = [
       
     { value: 't', label: 'Teacher' },
@@ -37,13 +38,24 @@ export class LoginComponent implements OnInit {
   params: Params;
   public data;
   slug_url:any={}
-  constructor(private SocialloginService: UserService,private aunumservices : AunumService,private authService: AuthService,private userService: UserService, private _router: Router, private _route: ActivatedRoute, private _masterservices: MasterService, public authenticationService: AuthenticationService) { }
+  contact: any;
+  userdata: any = {};
+  contacts: any[] = [];
+  constructor(private SocialloginService: UserService,private contactService: ContactService,private aunumservices : AunumService,private authService: AuthService,private userService: UserService, private _router: Router, private _route: ActivatedRoute, private _masterservices: MasterService, public authenticationService: AuthenticationService) { }
 
   // ngOnInit() {
-  //   // this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+   
   //   // this._router.navigate([this.returnUrl]);
   // }
   ngOnInit() {
+
+
+    this.contactService.getContacts().subscribe((data : any[])=>{
+      console.log(data);
+      this.contacts = data;
+      console.log(this.contacts)
+      }),
+      // this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
     this._route.paramMap.subscribe(params => {
       console.log(params.get("slug_url"))
       this.slug_url = params.get("slug_url")
@@ -55,9 +67,9 @@ export class LoginComponent implements OnInit {
   this.authenticationService.isLogout();
   this.authService.authState.subscribe((usersocial) => {
     this.usersocial = usersocial;
-    // this.loggedIn = (usersocial != null);
+    this.loggedIn = (usersocial != null);
  
-    // console.log(usersocial);
+
   });
 }
 
@@ -68,6 +80,7 @@ export class LoginComponent implements OnInit {
       action:"login"
 
     }
+
     if(this.slug_url == null || this.slug_url == "" || this.slug_url == undefined){
       this.userService.Login(userLogin)
       .subscribe(
@@ -110,17 +123,24 @@ export class LoginComponent implements OnInit {
       this.userService.subLogin(subuserLogin)
       .subscribe(
         data => {
+          console.log("data",data)
           if (data.status == "0") {
             alert("login Faild");
           } else {
-
+            // sessionStorage.setItem('user_type',JSON.stringify(data.data.user_type)) 
+            // sessionStorage.setItem('currentUser', JSON.stringify(data.data));
+            // sessionStorage.setItem('token', JSON.stringify(data.data.token));
+            // sessionStorage.setItem('first_name',JSON.stringify(data.data.first_name));
+            // sessionStorage.setItem('userid',JSON.stringify(data.data.id))
+ 
             alert("login successfully")
              // console.log(data.data.result)
             // this.userType = data.data.result;
-              this._router.navigate(['dashboard',this.slug_url]);  
+              // this._router.navigate(['dashboard/',this.slug_url]);  
               // this._router.navigate(['course']);
+             this._router.navigate([this.slug_url+'/dashboard']);
 
-            
+              // this._router.navigate(['dashboard']); 
           }        
         },
         error => {
