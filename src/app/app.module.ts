@@ -92,7 +92,7 @@ export function provideConfig() {
     PaypalDemoComponent,
     DeckFilterPipe,
     DeckfileComponent,
-    ContactDetailComponent
+ 
   ],
   imports: [
     BrowserModule,

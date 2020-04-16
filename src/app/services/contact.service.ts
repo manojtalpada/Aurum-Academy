@@ -14,6 +14,6 @@ export class ContactService {
   getContact(username){
   //  return this.http.get(`${this.API_URL + username+'/contact'}`) 
   //  console.log(this.http.get(`${this.API_URL + username+'/contact'}`));
-  return this.http.get(`${this.API_URL + 'contact'}/${username}`) 
+  // return this.http.get(`${this.API_URL + 'contact'}/${username}`) 
   }
 }

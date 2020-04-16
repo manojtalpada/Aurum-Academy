@@ -15,14 +15,14 @@ export class ContactDetailComponent implements OnInit {
   constructor(private contactService: ContactService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+  //   this.route.paramMap.subscribe(params => {
 	
- 	this.contactService.getContact(params.get('user_name')).subscribe(c =>{
-		console.log(c);
-    this.contact = c;
-    alert(c)
-    })   
-    });
+ 	// this.contactService.getContact(params.get('user_name')).subscribe(c =>{
+	// 	console.log(c);
+  //   this.contact = c;
+  //   alert(c)
+  //   })   
+  //   });
  	
   }
 }

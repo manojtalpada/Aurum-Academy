@@ -34,11 +34,11 @@ export class ViewUserComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.contactService.getContacts().subscribe((data : any[])=>{
-      console.log(data);
-      this.contacts = data;
-      console.log(this.contacts)
-      })
+    // this.contactService.getContacts().subscribe((data : any[])=>{
+    //   console.log(data);
+    //   this.contacts = data;
+    //   console.log(this.contacts)
+    //   })
   }
 
 
