@@ -92,11 +92,12 @@ export class UserService {
         });
     }
     Login(data){
+         var user_type;
         return this.http.post(`${this.baseUrl}/login`,JSON.stringify(data),this.options)
         .map(res =>{
            
             var data;
-            data = res
+            data = res 
             if (data && data.data.token) {
                 // console.log(user);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -104,12 +105,11 @@ export class UserService {
                 sessionStorage.setItem('token', JSON.stringify(data.data.token));
                 sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
                 sessionStorage.setItem('userid',JSON.stringify(data.data.result.id))
-                sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
+                // sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
 
 
              }
-             console.log(data)
-            return data;
+             return data;
         })
       }
       //subaccount Login
@@ -152,7 +152,7 @@ export class UserService {
                 sessionStorage.setItem('token', JSON.stringify(data.data.token));
                 sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
                 sessionStorage.setItem('userid',JSON.stringify(data.data.result.id));
-                sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
+                // sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
 
              }
             
