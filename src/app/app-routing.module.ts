@@ -56,6 +56,7 @@ const routes: Routes = [
   {path : ":url_slug/deckfile",component:DeckfileComponent},
   {path:":url_slug/cards",component:CardsComponent},
   {path : ":url_slug/folder",component:FolderComponent},
+  {path:":url_slug/view-user",component: ViewUserComponent},
   {path : ":url_slug/course",component : CourseComponent},
   // {path:':username/contact',component: ContactDetailComponent},
   // / {path:"",redirectTo:"dashboard/:slug_url",pathMatch:"full"},
