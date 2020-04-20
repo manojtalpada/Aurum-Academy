@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     //   }),
       // this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
     this._route.paramMap.subscribe(params => {
-      console.log(params.get("slug_url"))
+      // console.log(params.get("slug_url"))
       this.slug_url = params.get("slug_url")
 
   })
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
 
 
 selected(values){
-console.log(values.label)
+// console.log(values.label)
 this.slug_type = values.label;
 }
   logindd() {
@@ -144,7 +144,7 @@ this.slug_type = values.label;
         url_slug: this.slug_url,
         action: "sub_login",
       };
-      console.log(subuserLogin);
+      // console.log(subuserLogin);
 
       this.userService.subLogin(subuserLogin).subscribe(
         (res) => {
@@ -208,7 +208,7 @@ this.slug_type = values.label;
         url_slug: this.slug_url,
         action: "sub_login",
       };
-      console.log(subuserLogin);
+      // console.log(subuserLogin);
 
       this.userService.subLogin(subuserLogin).subscribe(
         (res) => {
@@ -587,7 +587,8 @@ this.slug_type = values.label;
     this.userService.register_social(this.sData).subscribe((res: any) => {
       // debugger;
       this.usersocial = res.data[0];
-      console.log(res);
+      // console.log(res);
+      // console.log(userInfo.id)
       // console.log(this.usersocial)
       // this.response = res.userDetail;
       // localStorage.setItem('socialusers', JSON.stringify( this.usersocial));
@@ -601,7 +602,7 @@ this.slug_type = values.label;
       action: "social_login",
       google_id: userid,
     };
-    console.log(userSet);
+    // console.log(userSet);
     this.userService.social_login(userSet).subscribe((res: any) => {
       // debugger;
 
@@ -651,7 +652,7 @@ this.slug_type = values.label;
       action: "social_login",
       google_id: userid,
     };
-    console.log(userSet);
+    // console.log(userSet);
     this.userService.social_login(userSet).subscribe((res: any) => {
       // debugger;
 

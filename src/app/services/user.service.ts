@@ -121,7 +121,7 @@ export class UserService {
              var data;
             data = res
             if (data && data.data.token) {
-                // console.log("slu",data.data.url_slug);
+                console.log("slu",data.data);
 
                 // alert("hi")
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -151,14 +151,14 @@ export class UserService {
             var data;
             data = res
             if (data && data.data.token) {
-                // console.log(user);
+                console.log("social",data);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 sessionStorage.setItem('currentUser', JSON.stringify(data.data.result));
                 sessionStorage.setItem('token', JSON.stringify(data.data.token));
                 sessionStorage.setItem('first_name',JSON.stringify(data.data.result.first_name));
                 sessionStorage.setItem('userid',JSON.stringify(data.data.result.id));
-                // sessionStorage.setItem('user_type',JSON.stringify(data.data.result.user_type))
-
+                sessionStorage.setItem('Facebook_ID',JSON.stringify(data.data.result.facebook_id))
+                sessionStorage.setItem('Google_ID',JSON.stringify(data.data.result.google_id))
              }
             
             return data;

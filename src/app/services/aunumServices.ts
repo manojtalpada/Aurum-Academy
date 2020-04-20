@@ -125,7 +125,7 @@ export class AunumService {
             .map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
-                    // console.log(user);
+                    console.log("simple",user);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     localStorage.setItem('userType', user.user.userType);
