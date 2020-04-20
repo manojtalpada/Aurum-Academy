@@ -222,7 +222,7 @@
 
 
                                     <div class="text-left">
-                                        <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
+                                        <button class="btn btn-primary" (click)="AddCard();addcards = false;">Save Card</button>
                                     </div>
                                 </div>
                             </form>
@@ -247,7 +247,7 @@
                 <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
                 </h4> -->
-                <button type="button" class="close" (click)="editorModel.hide()" aria-label="Close">
+                <button type="button" class="close" (click)="editorModel.hide();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
             </div>
@@ -268,7 +268,7 @@
                                 <div class="html">
                                     {{ htmlContent }}
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
+                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide();">
                                     Submit
                                 </button>
                             </div>
@@ -303,7 +303,7 @@
                                     <markdown [data]="markdownText" (ready)="onReady()"></markdown>
 
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+                                <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide();"> Submit</button>
 
                             </div>
 
@@ -332,7 +332,7 @@
                                             <button type="reset" (click)="reset()">Reset form</button>
                                         </p>
 
-                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);editorModel.hide();"> Submit</button>
                                     </form>
 
                                     <h3>Form data preview</h3>
@@ -506,7 +506,7 @@
 
 
                                     <div class="text-left">
-                                        <button class="btn btn-primary" (click)="UpdateCard()">Update</button>
+                                        <button class="btn btn-primary" (click)="UpdateCard();Updatecards = false;">Update</button>
                                     </div>
                                 </div>
                             </form>

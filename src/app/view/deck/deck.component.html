@@ -320,7 +320,7 @@
                                     <div class="result-preview outline">
                                         <markdown [data]="markdownText"></markdown>                                  
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button> ->
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide();"> Submit</button> ->
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h1>Markdown editor</h1>
@@ -346,7 +346,7 @@
                                         <markdown [data]="markdownText" (ready)="onReady()"></markdown>
                                     
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide();"> Submit</button>
                              
                                 </div>
 
@@ -372,7 +372,7 @@
                                             <button type="reset" (click)="reset()">Reset form</button>
                                         </p>
     
-                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);editorModel.hide();"> Submit</button>
                                     </form>
     
                                     <h3>Form data preview</h3>
