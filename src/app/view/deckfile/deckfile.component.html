@@ -214,7 +214,7 @@
 
 
                                     <div class="text-left">
-                                        <button class="btn btn-primary" (click)="AddCard()">Save Card</button>
+                                        <button class="btn btn-primary" (click)="AddCard();addcards = false;">Save Card</button>
                                     </div>
                                 </div>
                             </form>
@@ -239,7 +239,7 @@
                 <h4 class="modal-title appoint-color" *ngIf="deck.id != null">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update Deck
                 </h4> -->
-                <button type="button" class="close" (click)="editorModel.hide()" aria-label="Close">
+                <button type="button" class="close" (click)="editorModel.hide();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
             </div>
@@ -500,7 +500,7 @@
 
 
                                     <div class="text-left">
-                                        <button class="btn btn-primary" (click)="UpdateCard()">Update</button>
+                                        <button class="btn btn-primary" (click)="UpdateCard();Updatecards = false;">Update</button>
                                     </div>
                                 </div>
                             </form>

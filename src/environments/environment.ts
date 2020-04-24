@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  APP_URL:"http://192.168.29.52/aurum/inrest"
+  APP_URL:"http://192.168.29.54/aurum/inrest"
 };
 
 /*
