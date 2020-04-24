@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="heading">
-                        <h3>Flashcards in “{{ deck.name }}”</h3>
+                        <h3>Flashcardss in “{{ deck.name }}”</h3>
                         <a (click)="addcards = false;clearInputMethod1();" class="btn btn-primary float-right"><span class="mdi mdi-arrow-left"></span> Back</a>
 
                         <a (click)="editorModel.show()" class="btn btn-primary float-right"><span class="fa fa-random"></span> Switch to Advance Editor</a
@@ -271,10 +271,7 @@
             <div class="modal-body">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-
-              
-                           
+                        <div class="col-md-12"> 
                                 <div  *ngIf="wysiwg" class="form-group">
                                     <header class="header">
                                         <h1>WYSIWYG editor</h1>
@@ -285,13 +282,10 @@
                                     <div class="html">
                                         {{ htmlContent }}
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
-                                        Submit
+                                    <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide()">
+                                        Submit1
                                     </button>                              
-                            </div>
-
-                      
-
+                            </div> 
                             <div *ngIf="markdwn" class="form-group">                               
                                         <header class="header">
                                         <h1>Markdown editor</h1>
@@ -320,7 +314,7 @@
                                     <div class="result-preview outline">
                                         <markdown [data]="markdownText"></markdown>                                  
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button> ->
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit1</button> ->
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h1>Markdown editor</h1>
@@ -346,7 +340,7 @@
                                         <markdown [data]="markdownText" (ready)="onReady()"></markdown>
                                     
                                     </div>
-                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+                                    <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit1</button>
                              
                                 </div>
 

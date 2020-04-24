@@ -58,6 +58,8 @@ const routes: Routes = [
   {path : ":url_slug/folder",component:FolderComponent},
   {path:":url_slug/view-user",component: ViewUserComponent},
   {path : ":url_slug/course",component : CourseComponent},
+  {path:":url_slug/attachment",component:AttachmentComponent},
+
   // {path:':username/contact',component: ContactDetailComponent},
   // / {path:"",redirectTo:"dashboard/:slug_url",pathMatch:"full"},
   {path:"",redirectTo:"dashboard",pathMatch:"full"},

@@ -10,15 +10,40 @@ import { AuthService } from 'angularx-social-login';
 export class LogoutComponent implements OnInit {
 
   returnUrl: string; 
+  facebookid= JSON.parse(sessionStorage.getItem("Facebook_ID"));
+   
+  googleid= JSON.parse(sessionStorage.getItem("Google_ID"));
+
   constructor(private _route: ActivatedRoute,
     private _router: Router,private authService: AuthService) { }
 
   ngOnInit() {
-       
+    // this.signOut();
+    
+    // sessionStorage.removeItem('token');
+    // sessionStorage.clear();
+    // this._router.navigate(['login']);
+    if(this.googleid !="" && this.googleid !=null){
+      // alert("google")
+    this.authService.signOut();  
     sessionStorage.removeItem('token');
     sessionStorage.clear();
-    this.signOut();
-    this._router.navigate(['login']);
+    this._router.navigate(['login','']); 
+    // this.signOut();
+    
+  }else if(this.facebookid !="" && this.facebookid !=null){
+    // alert("facebook")
+    this.authService.signOut();  
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    this._router.navigate(['login','']); 
+  }else{
+    // alert("simple")
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    this._router.navigate(['login','']);
+    // console.log(this.userid)
+ }
   }
 
   signOut(): void {

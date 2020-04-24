@@ -397,7 +397,7 @@ export class DeckfileComponent implements OnInit {
     this.aunumservices.getAllCardById(dataget).subscribe(
       response => {
         this.deckbycardList = response.data;
-        // console.log("Deck", this.deckbycardList);
+        console.log("Deck", this.deckbycardList);
       },
       error => {
         console.log(error);

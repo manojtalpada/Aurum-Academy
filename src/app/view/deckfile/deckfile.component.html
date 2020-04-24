@@ -7,18 +7,12 @@
                     <div class="col-sm-12">
                         <div class="heading">
                             <h3>Deck Details</h3>
-                            <a (click)="addModel.show(); deck = {}" class="btn btn-primary float-right">+ Create New Deck</a
-            >
+                            <a (click)="addModel.show(); deck = {}" class="btn btn-primary float-right">+ Create New Deck</a>
           </div>
           <div class="card">
             <div class="card-body">
               <!-- <table id="example" class="table table-striped table-bordered" style="width:100%" class="table table-striped" [mfData]="deckList |  filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10"> -->
-              <table
-                class="table"
-                [mfData]="deckList | dataFilter: filterQuery"
-                #mf="mfDataTable"
-                [mfRowsOnPage]="5"
-              >
+              <table class="table" [mfData]="deckList | dataFilter: filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                   <tr>
                     <th>Deck Name</th>
@@ -43,9 +37,7 @@
                           href="#"
                           data-toggle="modal"
                           (click)="openDeckModel(item); addModel.show()"
-                          class="btn btn-success"
-                          ><span class="mdi mdi-lead-pencil"></span
-                        ></a>
+                          class="btn btn-success"><span class="mdi mdi-lead-pencil"></span></a>
                             <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
                         ></a>
                         </div>
@@ -268,7 +260,7 @@
                                 <div class="html">
                                     {{ htmlContent }}
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);">
+                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide()">
                                     Submit
                                 </button>
                             </div>
@@ -301,9 +293,10 @@
                                 <h3 class="text-success bold">Preview</h3>
                                 <div class="result-preview outline">
                                     <markdown [data]="markdownText" (ready)="onReady()"></markdown>
+                                    
 
                                 </div>
-                                <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);"> Submit</button>
+                                <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide()"> Submit</button>
 
                             </div>
 
@@ -332,7 +325,7 @@
                                             <button type="reset" (click)="reset()">Reset form</button>
                                         </p>
 
-                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);"> Submit</button>
+                                        <button type="submit" class="btn btn-info float-right" (click)="sendCKEditorsdata(editorobject,no);editorModel.hide()"> Submit</button>
                                     </form>
 
                                     <h3>Form data preview</h3>
@@ -382,23 +375,24 @@
                             <div class="card-accent-info">
                                 <div class="action-buttons text-left">
                                     <a href="#" data-toggle="modal" (click)="removeCardDetails(item)" class="btn btn-danger"><span class="mdi mdi-close"></span></a>
-                                    <a href="#" data-toggle="modal" (click)="openCardModel(item);patchValue1(item); Updatecardmodal();ShowModel.hide();" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span
-                                      ></a>
+                                    <a href="#" data-toggle="modal" (click)="openCardModel(item);patchValue1(item); Updatecardmodal();ShowModel.hide();" class="btn btn-success">
+                                        <span class="mdi mdi-lead-pencil"></span></a>
                                 </div>
                                 <div class="card-body-deck" *ngIf="!ap">
-                                    <h4 class="card-title">
+                                    <h4 >
                                         <markdown [data]="item.side1"></markdown>
+                                        <!-- <div [innerHtml]="item.side1" ></div> -->
                                     </h4>
                                     <p class="card-text"> </p>
 
                                 </div>
+                                
                                 <div class="card-body-deck" *ngIf="ap">
-                                    <h4 class="card-title">
-                                        <markdown [data]="item.side2"></markdown>
+                                    <h4 >
+                                        <markdown [data]="item.side2"></markdown> 
+                                        <!-- <div [innerHtml]="item.side2" ></div> -->
                                     </h4>
-
-                                    <p class="card-text"> </p>
-
+                                     <p class="card-text"> </p> 
 
                                 </div>
 

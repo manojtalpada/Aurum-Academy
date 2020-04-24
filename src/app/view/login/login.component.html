@@ -93,10 +93,10 @@
                             <div class="form-group">
                                 <label for="select1">Select UserTypdasdase</label>
                                 <fieldset class="form-group">
-                                    <ng-select name="user_type" [(ngModel)]="userType.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
+                                    <ng-select name="user_type" (selected)="selected($event);" [(ngModel)]="userType.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
                                 </fieldset>
                             </div>
-                            <div class="form-group">
+                            <div *ngIf="slug_type=='Teacher'" class="form-group">
                                 <label for="name">Slug URL</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="userType.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter Slug URL">
 
@@ -135,10 +135,10 @@
                             <div class="form-group">
                                 <label for="select1">Select UserType</label>
                                 <fieldset class="form-group">
-                                    <ng-select name="user_type" [(ngModel)]="subuserType.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
+                                    <ng-select name="user_type" (selected)="selected($event);" [(ngModel)]="subuserType.user_type" #user_type="ngModel" placeholder="Select user_type" [options]="type" [allowClear]="true"></ng-select>
                                 </fieldset>
                             </div>
-                            <div class="form-group">
+                            <div *ngIf="slug_type=='Teacher'" class="form-group">
                                 <label for="name">Slug URL</label>
                                 <input class="form-control" id="name" type="text" [(ngModel)]="subuserType.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter Slug URL">
 
