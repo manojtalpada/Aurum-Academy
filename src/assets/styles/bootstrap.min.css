@@ -229,7 +229,8 @@ figure {
 img {
     width: 370px;
     vertical-align: middle;
-    border-style: none
+    border-style: none;
+    width:370px;
 }
 
 svg:not(:root) {

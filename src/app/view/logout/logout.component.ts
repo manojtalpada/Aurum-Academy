@@ -25,12 +25,22 @@ export class LogoutComponent implements OnInit {
      }
 
   ngOnInit() {
+<<<<<<< HEAD
    
    
      
  
    if(this.googleid !="" && this.googleid !=null){
       alert("google")
+=======
+    // this.signOut();
+    
+    // sessionStorage.removeItem('token');
+    // sessionStorage.clear();
+    // this._router.navigate(['login']);
+    if(this.googleid !="" && this.googleid !=null){
+      // alert("google")
+>>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
     this.authService.signOut();  
     sessionStorage.removeItem('token');
     sessionStorage.clear();
@@ -38,18 +48,18 @@ export class LogoutComponent implements OnInit {
     // this.signOut();
     
   }else if(this.facebookid !="" && this.facebookid !=null){
-    alert("facebook")
+    // alert("facebook")
     this.authService.signOut();  
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     this._router.navigate(['login','']); 
   }else{
-    alert("simple")
+    // alert("simple")
     sessionStorage.removeItem('token');
     sessionStorage.clear();
     this._router.navigate(['login','']);
     // console.log(this.userid)
-  }
+ }
   }
   signOut(): void {
     this.authService.signOut();
