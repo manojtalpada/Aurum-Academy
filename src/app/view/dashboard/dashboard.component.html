@@ -1,3 +1,108 @@
 <app-header></app-header>
 
+<app-main-page></app-main-page>
+
 <!-- <app-footer></app-footer> -->
+<!-- <div id="action-description">
+    <p>This sample demonstrates the resize operation of the Rich Text Editor control. To resize the Rich Text Editor, select and resize the editor using its handle (grip) at the bottom right corner of the content panel.</p>
+</div>
+<div class="control-section">
+    <ejs-richtexteditor id='defaultRTE' [enableResize]="true" height='250px'>
+        <ng-template #valueTemplate>
+            <p>The Rich Text Editor component is WYSIWYG ("what you see is what you get") editor that provides the best user experience to create and update the content. Users can format their content using standard toolbar commands.</p>
+        </ng-template>
+    </ejs-richtexteditor>
+</div>
+<div id='rteContent' style='display: none'>
+
+</div> -->
+<div class="modal-body">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <!-- <label for="name"> Folder Name</label>
+                    <input class="form-control" id="name" type="text" [(ngModel)]="folder.name" #name="ngModel" name="name" placeholder="Enter your Folder Name">
+
+                    <label for="name">Parent ID</label> -->
+                    <input type="text" name="text" class="form-control" placeholder="Enter Parent ID">
+                    <a href="#">say it!</a>
+                    <audio src="" class="speech" hidden> </audio>
+                    <!-- <div class="form-group">
+                    <label for="select1">Select your Permission</label>
+                    <fieldset class="form-group">
+                        <ng-select name="permission" [(ngModel)]="course.permission" #permission="ngModel" placeholder="Select your permission" [options]="type" [allowClear]="true"></ng-select>
+                    </fieldset>
+                </div> -->
+
+                    <!-- <label for="name">url_slug</label>
+                <input class="form-control" id="name" type="text" [(ngModel)]="course.url_slug" #url_slug="ngModel" name="url_slug" placeholder="Enter url_slug"> -->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" (click)="addModel.hide()">Close</button> -->
+        <button type="button" class="btn btn-primary">Speack</button>
+        <!-- <button type="button" (click)="updateFolder();addModel.hide()" *ngIf="folder.id != null" class="btn btn-primary">Update
+            Folder</button> -->
+    </div>
+</div>
+
+<form class="container text-center">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <div class="form-group">
+                <div id="front-text" class="text-success">
+                    GeeksforGeeks Text-to-Speech Conversion
+                </div>
+
+                <!-- Input box text area -->
+                <textarea id="maintext" class="form-control form-control-lg" style="max-lines: 2" placeholder="Enter the text..."> 
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rate of voice which we will be updated by user -->
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <div class="form-group">
+                <label for="rate">Rate</label>
+                <div id="rate-value" class="badge badge-primary">5</div>
+                <input class="custom-range" type="range" id="rate" max="1" min="0.2" value="1.5" step="0.1">
+            </div>
+        </div>
+    </div>
+
+    <!-- Pitch of voice which we will be updated by user -->
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <div class="form-group">
+                <label for="pitch">Pitch</label>
+                <div id="pitch-value" class="badge badge-primary">5</div>
+                <input class="custom-range" type="range" id="pitch" max="1" min="0.2" value="1.5" step="0.1">
+            </div>
+        </div>
+    </div>
+
+    <!-- The different types of voice along with country and language -->
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <div class="form-group">
+
+                <!-- This section will be dynamically loaded from 
+                    the API so we left it blank for now-->
+                <select class="form-control form-control-lg" id="voice-select"></select>
+            </div>
+
+            <!-- Button to enable the speech from the  
+                text given in the input box -->
+            <button id="submit" class="btn btn-success btn-lg"> 
+                Speak it 
+            </button>
+        </div>
+    </div>
+</form>

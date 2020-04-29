@@ -47,6 +47,9 @@ import { AngularMarkdownEditorModule } from 'src/lib/angular-markdown-editor';
 import { RoleGuardService } from './guards/roleGuardService';
 import { DeckfileComponent } from './view/deckfile/deckfile.component';
 import { ContactDetailComponent } from './view/contact-detail/contact-detail.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { SpeechSynthesisModule,} from '@kamiazya/ngx-speech-synthesis';
+import { MainPageComponent } from './view/main-page/main-page.component';
 
 const APP_CONTAINERS = [
   FullLayoutComponent,
@@ -92,6 +95,7 @@ export function provideConfig() {
     PaypalDemoComponent,
     DeckFilterPipe,
     DeckfileComponent,
+    MainPageComponent,
  
   ],
   imports: [
@@ -105,6 +109,7 @@ export function provideConfig() {
     DataTableModule,   
     SelectModule, 
     ReactiveFormsModule,
+    RichTextEditorAllModule,
     TabsModule,
     NgxPayPalModule,
     AngularEditorModule,
@@ -132,6 +137,12 @@ export function provideConfig() {
       // add any Global Options/Config you might want
       // to avoid passing the same options over and over in each components of your App
       iconlibrary: 'glyph'
+    }),
+    SpeechSynthesisModule.forRoot({
+      lang: 'en',
+      volume: 1.0,
+      pitch: 1.0,
+      rate: 1.0,
     })
     
   ],

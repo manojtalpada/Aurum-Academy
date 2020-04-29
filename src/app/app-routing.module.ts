@@ -19,6 +19,7 @@ import { AuthGuard } from './guards';
 import { PaypalDemoComponent } from './view/paypal-demo/paypal-demo.component';
 import { RoleGuardService } from './guards/roleGuardService';
 import { DeckfileComponent } from './view/deckfile/deckfile.component';
+import { MainPageComponent } from './view/main-page/main-page.component';
 
 var userType = sessionStorage.getItem('user_type');
 // console.log(userType)
@@ -60,6 +61,8 @@ const routes: Routes = [
   {path : ":url_slug/course",component : CourseComponent},
   // {path:':username/contact',component: ContactDetailComponent},
   // / {path:"",redirectTo:"dashboard/:slug_url",pathMatch:"full"},
+  {path :"main-page",component:MainPageComponent},
+  {path:"main-page/:slug_url",component: MainPageComponent},
   {path:"",redirectTo:"dashboard",pathMatch:"full"},
   { path: '**', redirectTo: ''}
 

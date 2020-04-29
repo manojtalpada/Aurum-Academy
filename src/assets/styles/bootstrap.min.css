@@ -227,6 +227,7 @@ figure {
 }
 
 img {
+    width: 370px;
     vertical-align: middle;
     border-style: none
 }

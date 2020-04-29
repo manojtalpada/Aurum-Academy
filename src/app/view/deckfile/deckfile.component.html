@@ -263,11 +263,12 @@
                                     <h1>WYSIWYG editor</h1>
                                     <p>Native WYSIWYG editor for Angular 6+</p>
                                 </header>
-                                <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig" id='editorConfig' enableresize="true"></angular-editor>
+                                <!-- <ejs-richtexteditor [(ngModel)]="htmlContent" config="editorConfig" id='editorConfig' enableResize="true" height='250px'></ejs-richtexteditor> -->
                                 <h5 class="html-header">HTML Output</h5>
                                 <div class="html">
-                                    {{ htmlContent }}
-                                </div>
+                                    {{ htmlContent }} </div>
+
                                 <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide();">
                                     Submit
                                 </button>
@@ -301,7 +302,7 @@
                                 <h3 class="text-success bold">Preview</h3>
                                 <div class="result-preview outline">
                                     <markdown [data]="markdownText" (ready)="onReady()"></markdown>
-
+                                    <!-- {{[data] | json }} -->
                                 </div>
                                 <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide();"> Submit</button>
 
@@ -327,7 +328,7 @@
                                         <p *ngIf="description?.touched" class="alert">
                                             Description has been "touched".
                                         </p>
-                                        {{no | json}}
+                                        <!-- {{no | json}} -->
                                         <p>
                                             <button type="reset" (click)="reset()">Reset form</button>
                                         </p>
@@ -338,7 +339,7 @@
                                     <h3>Form data preview</h3>
 
                                     <markdown [data]="markdownText"></markdown>
-                                    <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre>
+                                    <!-- <pre style="width: 100%; overflow: auto;">{{form.value | json}}</pre> -->
                                 </div>
                             </div>
 
@@ -386,17 +387,17 @@
                                       ></a>
                                 </div>
                                 <div class="card-body-deck" *ngIf="!ap">
-                                    <h4 class="card-title">
-                                        <markdown [data]="item.side1"></markdown>
-                                    </h4>
+                                    <!-- <h4 class="card-title"> -->
+                                    <markdown [data]="item.side1"></markdown>
+
+                                    <!-- {{data | json}} -->
+                                    <!-- </h4> -->
                                     <p class="card-text"> </p>
 
                                 </div>
                                 <div class="card-body-deck" *ngIf="ap">
-                                    <h4 class="card-title">
-                                        <markdown [data]="item.side2"></markdown>
-                                    </h4>
-
+                                    <!-- <h4 class="card-title"> -->
+                                    <markdown [data]="item.side2"></markdown>
                                     <p class="card-text"> </p>
 
 
@@ -410,6 +411,8 @@
                         </div>
 
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -512,6 +515,17 @@
                             </form>
 
                             <!-- </div> -->
+                            <input type="file" accept="image/*" (change)="changeListener($event)">
+
+                            <div *ngIf="image">
+                                <h3>Result:</h3>
+                                <h4>Base64 encoded:</h4>
+                                <!-- <p>{{image?.replace("data:image/png;base64,", "")}}</p> -->
+                                <h4>Image:</h4>
+                                <!-- {{image | json}} -->
+                                <img src="{{image}}" alt="">
+                            </div>
+
 
                         </div>
                     </div>

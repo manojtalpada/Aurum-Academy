@@ -5,11 +5,14 @@ import { ActivatedRoute } from '@angular/router';
 import { MarkdownService } from 'ngx-markdown';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { EditorInstance, EditorOption } from 'src/lib/angular-markdown-editor';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ToolbarService, LinkService, ImageService, ResizeService, HtmlEditorService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'app-deckfile',
   templateUrl: './deckfile.component.html',
-  styleUrls: ['./deckfile.component.css']
+  styleUrls: ['./deckfile.component.css'],
+  providers: [ToolbarService, LinkService, ImageService, ResizeService, HtmlEditorService]
 })
 export class DeckfileComponent implements OnInit {
 
@@ -60,6 +63,7 @@ export class DeckfileComponent implements OnInit {
   //     new FormControl()
   //   ])
   // });
+  public image;
   addForm: FormGroup;
   rows = FormArray;
   constructor(
@@ -111,7 +115,16 @@ export class DeckfileComponent implements OnInit {
 
 
 
-
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: ProgressEvent) => {
+        // this.url = (<FileReader>event.target).result;
+      }
+  
+    }
+  }
 
   changeEditor(data) {
     console.log(data);
@@ -158,7 +171,90 @@ export class DeckfileComponent implements OnInit {
   //         tag: "h1",
   //       },
   //     ],
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+   
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+};
 
+toolbarHiddenButtons: [
+  [
+    'undo',
+    'redo',
+    'bold',
+    'italic',
+    'underline',
+    'strikeThrough',
+    'subscript',
+    'superscript',
+    'justifyLeft',
+    'justifyCenter',
+    'justifyRight',
+    'justifyFull',
+    'indent',
+    'outdent',
+    'insertUnorderedList',
+    'insertOrderedList',
+    'heading',
+    'fontName'
+  ],
+  [
+    'fontSize',
+    'textColor',
+    'backgroundColor',
+    'customClasses',
+    'link',
+    'unlink',
+    'insertImage',
+    'insertVideo',
+    'insertHorizontalRule',
+    'removeFormat',
+    'toggleEditorMode',
+    "insertTable",
+    "mediaEmbed",
+    "MathType",
+    "ChemType"
+  ]
+]
   //   };
 
   public config = {
@@ -397,13 +493,33 @@ export class DeckfileComponent implements OnInit {
     this.aunumservices.getAllCardById(dataget).subscribe(
       response => {
         this.deckbycardList = response.data;
-        // console.log("Deck", this.deckbycardList);
+        console.log("Deck", this.deckbycardList);
       },
       error => {
         console.log(error);
       }
     );
   }
+
+  // imagess
+
+  changeListener($event) : void {
+  this.readThis($event.target);
+}
+
+readThis(inputValue: any): void {
+  var file:File = inputValue.files[0];
+  var myReader:FileReader = new FileReader();
+
+  myReader.onloadend = (e) => {
+    this.image = myReader.result;
+    // console.log(myReader.result);
+  
+  }
+  myReader.readAsDataURL(file);
+  console.log(this.image);
+  console.log(file.name)
+}
 
   addanswer() {
     this.ap = !this.ap;

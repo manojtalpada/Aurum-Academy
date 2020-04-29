@@ -30,12 +30,12 @@ export class LogoutComponent implements OnInit {
      
  
    if(this.googleid !="" && this.googleid !=null){
-      // alert("google")
-    // this.authService.signOut();  
-    // sessionStorage.removeItem('token');
-    // sessionStorage.clear();
-    // this._router.navigate(['login','']); 
-    this.signOut();
+      alert("google")
+    this.authService.signOut();  
+    sessionStorage.removeItem('token');
+    sessionStorage.clear();
+    this._router.navigate(['login','']); 
+    // this.signOut();
     
   }else if(this.facebookid !="" && this.facebookid !=null){
     alert("facebook")
