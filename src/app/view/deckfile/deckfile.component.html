@@ -8,67 +8,63 @@
                         <div class="heading">
                             <h3>Deck Details</h3>
                             <a (click)="addModel.show(); deck = {}" class="btn btn-primary float-right">+ Create New Deck</a>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <!-- <table id="example" class="table table-striped table-bordered" style="width:100%" class="table table-striped" [mfData]="deckList |  filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10"> -->
-              <table class="table" [mfData]="deckList | dataFilter: filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
-                <thead>
-                  <tr>
-                    <th>Deck Name</th>
-                    <th>Description</th>
-                    <!-- <th>Permission</th>
-                                    <th>url_slug</th> -->
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of mf.data; let i = index">
-                    <!-- {{item | json}} -->
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
-                    <!-- <td>{{item.permission}}</td>
-                                    <td>{{item.url_slug}}</td> -->
-                    <!-- <td>{{item.birthdate | date: "dd/MM/yyyy"}}</td> -->
-
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          (click)="openDeckModel(item); addModel.show()"
-                          class="btn btn-success"><span class="mdi mdi-lead-pencil"></span></a>
-                            <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
-                        ></a>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item);clearInputMethod1();">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <table id="example" class="table table-striped table-bordered" style="width:100%" class="table table-striped" [mfData]="deckList |  filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10"> -->
+                                <table class="table" [mfData]="deckList | dataFilter: filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+                                    <thead>
+                                        <tr>
+                                            <th>Deck Name</th>
+                                            <th>Description</th>
+                                            <!-- <th>Permission</th>
+                                    <th>url_slug</th> -->
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of mf.data; let i = index">
+                                            <!-- {{item | json}} -->
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.description }}</td>
+                                            <!-- <td>{{item.permission}}</td>
+                                    <td>{{item.url_slug}}</td> -->
+                                            <!-- <td>{{item.birthdate | date: "dd/MM/yyyy"}}</td> -->
+
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <a href="#" data-toggle="modal" (click)="openDeckModel(item); addModel.show()" class="btn btn-success"><span class="mdi mdi-lead-pencil"></span></a>
+                                                    <a href="#" data-toggle="modal" (click)="deleteDeck(); openDeckModel(item)" class="btn btn-danger"><span class="mdi mdi-close"></span
+                        ></a>
+                                                </div>
+                                                <button type="button" class="btn btn-primary" (click)="addcard(); openDeckModel(item);clearInputMethod1();">
                         AddCard
                       </button>
-                        </td>
-                        <td>
-                            <button type="button" (click)="openDeckModel(item);ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="openDeckModel(item);ShowModel.show();cardDetails(item);" data-toggle="modal" data-target="#editModal" data-backdrop="static" data-keyboard="false" class="btn btn-info">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                                           </button>
 
-                        </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="7">
-                                    <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]">
-                                    </mfBootstrapPaginator>
-                                </td>
-                            </tr>
-                        </tfoot>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="7">
+                                                <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 15]">
+                                                </mfBootstrapPaginator>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
     </div>
-</div>
-</section>
-</div>
 </div>
 
 
@@ -258,16 +254,8 @@
                                 <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig" id='editorConfig' enableresize="true"></angular-editor>
                                 <!-- <ejs-richtexteditor [(ngModel)]="htmlContent" config="editorConfig" id='editorConfig' enableResize="true" height='250px'></ejs-richtexteditor> -->
                                 <h5 class="html-header">HTML Output</h5>
-                                <div class="html">
-<<<<<<< HEAD
-                                    {{ htmlContent }} </div>
 
-                                <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide();">
-=======
-                                    {{ htmlContent }}
-                                </div>
                                 <button type="button" class="btn btn-info float-right" (click)="WYSIWYEditor(no,editorobject);editorModel.hide()">
->>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
                                     Submit
                                 </button>
                             </div>
@@ -300,12 +288,7 @@
                                 <h3 class="text-success bold">Preview</h3>
                                 <div class="result-preview outline">
                                     <markdown [data]="markdownText" (ready)="onReady()"></markdown>
-<<<<<<< HEAD
                                     <!-- {{[data] | json }} -->
-=======
-                                    
-
->>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
                                 </div>
                                 <button type="button" class="btn btn-info float-right" (click)="sendEditorsdata(no,editorobject);editorModel.hide()"> Submit</button>
 
@@ -390,35 +373,25 @@
                                         <span class="mdi mdi-lead-pencil"></span></a>
                                 </div>
                                 <div class="card-body-deck" *ngIf="!ap">
-<<<<<<< HEAD
                                     <!-- <h4 class="card-title"> -->
                                     <markdown [data]="item.side1"></markdown>
 
                                     <!-- {{data | json}} -->
                                     <!-- </h4> -->
-=======
-                                    <h4 >
-                                        <markdown [data]="item.side1"></markdown>
-                                        <!-- <div [innerHtml]="item.side1" ></div> -->
-                                    </h4>
->>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
+
+                                    <!-- <div [innerHtml]="item.side1" ></div> -->
+
+
                                     <p class="card-text"> </p>
 
                                 </div>
-                                
+
                                 <div class="card-body-deck" *ngIf="ap">
-<<<<<<< HEAD
                                     <!-- <h4 class="card-title"> -->
                                     <markdown [data]="item.side2"></markdown>
                                     <p class="card-text"> </p>
+                                    <p class="card-text"> </p>
 
-=======
-                                    <h4 >
-                                        <markdown [data]="item.side2"></markdown> 
-                                        <!-- <div [innerHtml]="item.side2" ></div> -->
-                                    </h4>
-                                     <p class="card-text"> </p> 
->>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
 
                                 </div>
 

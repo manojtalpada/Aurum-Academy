@@ -51,6 +51,8 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
 import { SpeechSynthesisModule,} from '@kamiazya/ngx-speech-synthesis';
 import { MainPageComponent } from './view/main-page/main-page.component';
 
+
+
 const APP_CONTAINERS = [
   FullLayoutComponent,
   SimpleLayoutComponent
@@ -154,6 +156,9 @@ export function provideConfig() {
     AuthService,
     AunumService,
     UserService,
+    
+    
+    
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

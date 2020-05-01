@@ -25,22 +25,12 @@ export class LogoutComponent implements OnInit {
      }
 
   ngOnInit() {
-<<<<<<< HEAD
    
    
      
  
    if(this.googleid !="" && this.googleid !=null){
       alert("google")
-=======
-    // this.signOut();
-    
-    // sessionStorage.removeItem('token');
-    // sessionStorage.clear();
-    // this._router.navigate(['login']);
-    if(this.googleid !="" && this.googleid !=null){
-      // alert("google")
->>>>>>> 05211e19d70c251bedd100fdb3665967d9b1930d
     this.authService.signOut();  
     sessionStorage.removeItem('token');
     sessionStorage.clear();
